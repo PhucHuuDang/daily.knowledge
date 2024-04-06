@@ -1,4 +1,7 @@
 "use client";
+
+import { Poppins } from "next/font/google";
+
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { MotionValue, motion, useScroll, useTransform } from "framer-motion";
 import {
@@ -25,6 +28,8 @@ import { IconCaretDownFilled } from "@tabler/icons-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Logo } from "../logo";
+import { Button } from "./button";
+import Link from "next/link";
 
 interface MacbookScrollProps {
   src?: string;
@@ -32,6 +37,11 @@ interface MacbookScrollProps {
   title?: string | React.ReactNode;
   badge?: React.ReactNode;
 }
+
+const textFont = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 export const MacbookScroll = ({
   src,
@@ -63,8 +73,8 @@ export const MacbookScroll = ({
     [0, 0.3],
     [0.6, isMobile ? 1 : 1.5]
   );
-  const translate = useTransform(scrollYProgress, [0, 1], [0, 1500]);
-  const rotate = useTransform(scrollYProgress, [0.1, 0.12, 0.3], [-28, -28, 0]);
+  const translate = useTransform(scrollYProgress, [0, 5], [0, 1500]);
+  const rotate = useTransform(scrollYProgress, [0.7, 0.12, 0.3], [-28, -28, 0]);
   const textTransform = useTransform(scrollYProgress, [0, 0.3], [0, 100]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
@@ -73,16 +83,21 @@ export const MacbookScroll = ({
       ref={ref}
       // Todo: in here it was set "py-80" so it has large space in the middle so we need to set it again
       // ? bg-gradient-to-r from-[#614385] to-[#516395]
-      className="min-h-[200vh]  bg-amber-50 flex flex-col items-center py-0  justify-start flex-shrink-0 [perspective:800px] transform md:scale-100  scale-[0.35] sm:scale-50"
+      className="min-h-[100vh] md:min-h-[90vh] bg-gradient-to-r from-slate-900 to-slate-700 flex flex-col items-center py-0  justify-start flex-shrink-0 [perspective:800px] transform md:scale-100 scale-[0.35] sm:scale-100"
     >
       <motion.h2
         style={{
           translateY: textTransform,
           opacity: textOpacity,
         }}
-        className="dark:text-white text-neutral-800 text-3xl font-bold mb-14 text-center"
+        className="dark:text-white text-neutral-800 text-3xl md:text-2xl font-bold mb-14 text-center"
       >
-        <div className="dark:text-white text-xl flex-shrink-0  md:text-2xl font-semibold bg-gradient-to-r from-[#662D8C] via-[#86A8E7] to-[#ED1E79] inline-block text-transparent bg-clip-text">
+        <div
+          className={cn(
+            "items-center dark:text-white text-xl flex-shrink-0 md:text-2xl font-semibold bg-gradient-to-r from-[#662D8C] via-[#86A8E7] to-[#ED1E79] mx-auto text-transparent bg-clip-text",
+            textFont.className
+          )}
+        >
           {title || (
             <>
               We know that to become a developer, <br /> we have to know upgrade
@@ -92,7 +107,39 @@ export const MacbookScroll = ({
           )}
         </div>
 
-        <div className="mt-2">Button in here</div>
+        <Button
+          variant="outline"
+          className="mt-4 py-7 space-x-4 rounded-xl hover:scale-105 transition"
+        >
+          <Link
+            href={`${process.env.SIGN_IN!}`}
+            className="flex items-center space-x-4"
+          >
+            <div className="flex items-center space-x-[-15px]">
+              <div className="relative">
+                <Image src="/edge.svg" width={30} height={30} alt="edge" />
+              </div>
+
+              <div className="relative">
+                <Image
+                  src="/firefox.svg"
+                  width={30}
+                  height={30}
+                  alt="firefox"
+                />
+              </div>
+
+              <div className="relative">
+                <Image src="/chrome.svg" width={30} height={30} alt="chrome" />
+              </div>
+            </div>
+
+            <span className="text-lg font-bold">
+              Start reading -{" "}
+              <span className="font-medium text-neutral-400">Free forever</span>{" "}
+            </span>
+          </Link>
+        </Button>
       </motion.h2>
       {/* Lid */}
       <Lid
@@ -178,7 +225,7 @@ export const Lid = ({
         <div className="absolute inset-0 bg-[#272729] rounded-lg" />
         <Image
           src={src as string}
-          alt="aceternity logo"
+          alt="daily.k logo"
           fill
           className="object-cover object-left-top absolute rounded-lg inset-0 h-full w-full"
         />
@@ -651,27 +698,6 @@ export const OptionKey = ({ className }: { className: string }) => {
         width="32"
         height="32"
         stroke="none"
-      />
-    </svg>
-  );
-};
-
-const AceternityLogo = () => {
-  return (
-    <svg
-      width="66"
-      height="65"
-      viewBox="0 0 66 65"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-3 w-3 text-white"
-    >
-      <path
-        d="M8 8.05571C8 8.05571 54.9009 18.1782 57.8687 30.062C60.8365 41.9458 9.05432 57.4696 9.05432 57.4696"
-        stroke="currentColor"
-        strokeWidth="15"
-        strokeMiterlimit="3.86874"
-        strokeLinecap="round"
       />
     </svg>
   );

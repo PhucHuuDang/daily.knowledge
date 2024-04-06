@@ -78,6 +78,10 @@ const config = {
       },
     },
   },
+
+  variants: {
+    fill: ["hover", "focus"], // this line does the trick
+  },
   plugins: [require("tailwindcss-animate"), addVariablesForColors],
 } satisfies Config;
 

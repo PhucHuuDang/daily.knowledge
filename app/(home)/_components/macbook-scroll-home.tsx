@@ -10,7 +10,7 @@ export function MacbookScrollHome() {
     <div className="overflow-hidden dark:bg-[#4949c0] bg-white w-full">
       <MacbookScroll
         badge={
-          <Link href="https://github.com/PhucHuuDang" target="_blank">
+          <Link href={process.env.NEXT_PUBLIC_MY_GITHUB_URL!} target="_blank">
             <Github className="w-10 h-10 -rotate-12" />
           </Link>
         }

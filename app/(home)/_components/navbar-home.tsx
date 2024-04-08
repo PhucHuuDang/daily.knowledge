@@ -4,12 +4,14 @@ import Link from "next/link";
 
 export const NavbarHome = () => {
   // bg-[#0e1217]
+
+  // ? bg-gradient-to-r from-slate-900 to-slate-700
   return (
     <div
-      className="fixed top-0 h-14 flex items-center pt-6 bg-gradient-to-r from-slate-900 to-slate-700 w-full px-8 shadow-sm
+      className="fixed top-0 z-50 h-14 flex items-center pt-6 w-full px-8 shadow-sm
   "
     >
-      <div className="mx-auto flex items-center justify-around md:max-w-screen-2xl w-full">
+      <div className="mx-auto flex items-center justify-around md:max-w-screen-2xl w-full p-2 md:p-4 rounded-xl backdrop-blur-lg ">
         <Logo />
         <div className="space-x-4 flex items-center justify-between w-full md:block md:w-auto">
           <Button size="default" className="rounded-lg py-6">

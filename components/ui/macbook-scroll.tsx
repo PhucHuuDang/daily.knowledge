@@ -83,7 +83,7 @@ export const MacbookScroll = ({
       ref={ref}
       // Todo: in here it was set "py-80" so it has large space in the middle so we need to set it again
       // ? bg-gradient-to-r from-[#614385] to-[#516395]
-      className="min-h-[100vh] md:min-h-[90vh] bg-gradient-to-r from-slate-900 to-slate-700 flex flex-col items-center py-0  justify-start flex-shrink-0 [perspective:800px] transform md:scale-100 scale-[0.35] sm:scale-100"
+      className="min-h-[100vh] md:min-h-[110vh] bg-gradient-to-r from-slate-900 to-slate-700 flex flex-col items-center py-0  justify-start flex-shrink-0 [perspective:800px] transform md:scale-100 scale-[0.35] sm:scale-100"
     >
       <motion.h2
         style={{

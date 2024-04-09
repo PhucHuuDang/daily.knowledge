@@ -4,6 +4,7 @@ import { FormInput } from "@/components/form/form-input";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { SearchIcon } from "@/components/ui/search-icon";
+import { useCreatePost } from "@/hooks/use-create-post";
 import { UserButton } from "@clerk/nextjs";
 import { Bell, Search } from "lucide-react";
 import { ElementType } from "react";
@@ -11,6 +12,15 @@ import { IconType } from "react-icons";
 
 export const Navbar = () => {
   // const searchIconElement: ElementType = <SearchIcon />;
+
+  const createPost = useCreatePost();
+
+  const onClick = () => {
+    createPost.onOpen();
+    // console.log("first");
+    console.log(createPost.isOpen);
+  };
+
   return (
     <div className="fixed top-0 z-50 flex items-center justify-between w-full px-2 md:px-3 shadow-sm border-b">
       <div
@@ -37,6 +47,7 @@ export const Navbar = () => {
 
         <div className="flex items-center gap-4">
           <Button
+            onClick={onClick}
             variant="default"
             className="h-12 font-semibold px-7 rounded-lg border border-slate-300"
           >

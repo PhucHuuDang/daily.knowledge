@@ -51,46 +51,30 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
               {label}
             </Label>
           ) : null}
-          {
-            Icon ? (
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                  <Icon />
-                </div>
-                <Input
-                  ref={ref}
-                  type={type}
-                  required={required}
-                  disabled={disabled || pending}
-                  placeholder={placeholder}
-                  id={id}
-                  name={id}
-                  defaultValue={defaultValue}
-                  className={cn("text-sm pl8 py-1 h-7 w-full", className)}
-                  aria-describedby={`${id}-error`}
-                  style={{ paddingLeft: <Icon /> ? "2.5rem" : "1rem" }}
-                />
+          {Icon ? (
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                <Icon />
               </div>
-            ) : searchIcon ? (
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
-                  {searchIcon}
-                </div>
-                <Input
-                  ref={ref}
-                  type={type}
-                  required={required}
-                  disabled={disabled || pending}
-                  placeholder={placeholder}
-                  id={id}
-                  name={id}
-                  defaultValue={defaultValue}
-                  className={cn("text-sm pl-8 py-1 h-7 w-full", className)}
-                  aria-describedby={`${id}-error`}
-                  style={{ paddingLeft: searchIcon ? "3rem" : "1rem" }}
-                />
+              <Input
+                ref={ref}
+                type={type}
+                required={required}
+                disabled={disabled || pending}
+                placeholder={placeholder}
+                id={id}
+                name={id}
+                defaultValue={defaultValue}
+                className={cn("text-sm pl8 py-1 h-7 w-full", className)}
+                aria-describedby={`${id}-error`}
+                style={{ paddingLeft: <Icon /> ? "2.5rem" : "1rem" }}
+              />
+            </div>
+          ) : searchIcon ? (
+            <div className="relative">
+              <div className="absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
+                {searchIcon}
               </div>
-            ) : (
               <Input
                 ref={ref}
                 type={type}
@@ -102,36 +86,23 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
                 defaultValue={defaultValue}
                 className={cn("text-sm pl-8 py-1 h-7 w-full", className)}
                 aria-describedby={`${id}-error`}
+                style={{ paddingLeft: searchIcon ? "3rem" : "1rem" }}
               />
-            )
-            //    (
-            //   <Input
-            //     ref={ref}
-            //     type={type}
-            //     required={required}
-            //     disabled={disabled || pending}
-            //     placeholder={placeholder}
-            //     id={id}
-            //     name={id}
-            //     defaultValue={defaultValue}
-            //     className={cn("text-sm pl-8 py-1 h-7 w-full", className)}
-            //     aria-describedby={`${id}-error`}
-            //   />
-            // ) : null
-          }
-
-          {/* <Input
-            ref={ref}
-            type={type}
-            required={required}
-            disabled={disabled || pending}
-            placeholder={placeholder}
-            id={id}
-            name={id}
-            defaultValue={defaultValue}
-            className={cn("text-sm px-2 py-1 h-7 w-full", className)}
-            aria-describedby={`${id}-error`}
-          /> */}
+            </div>
+          ) : (
+            <Input
+              ref={ref}
+              type={type}
+              required={required}
+              disabled={disabled || pending}
+              placeholder={placeholder}
+              id={id}
+              name={id}
+              defaultValue={defaultValue}
+              className={cn("text-sm pl-8 py-1 h-7 w-full", className)}
+              aria-describedby={`${id}-error`}
+            />
+          )}
         </div>
       </div>
     );

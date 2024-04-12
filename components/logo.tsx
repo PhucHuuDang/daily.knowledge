@@ -1,13 +1,30 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
-export const Logo = () => {
+interface LogoProps {
+  className?: string;
+  height?: number;
+  width?: number;
+}
+
+export const Logo = ({ className, width = 50, height = 50 }: LogoProps) => {
   return (
     <Link href="/">
-      <div className="flex z-50 items-center gap-x-1 md:text-2xl hover:opacity-75 transition ">
-        <Image alt="daily.know-logo" src="/logo.png" height={50} width={50} />
+      <div
+        className={cn(
+          "flex z-50 items-center gap-x-1 md:text-2xl hover:opacity-75 transition ",
+          className
+        )}
+      >
+        <Image
+          alt="daily.know-logo"
+          src="/logo.png"
+          height={height}
+          width={width}
+        />
 
         <div className="text-slate-300">
           daily.

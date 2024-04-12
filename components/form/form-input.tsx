@@ -45,7 +45,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
         <div className="space-y-1">
           {label ? (
             <Label
-              className="text-sm font-semibold text-neutral-700"
+              className="text-lg font-semibold text-neutral-200"
               htmlFor={id}
             >
               {label}
@@ -65,7 +65,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
                 id={id}
                 name={id}
                 defaultValue={defaultValue}
-                className={cn("text-sm pl8 py-1 h-7 w-full", className)}
+                className={cn("text-sm pl-8 py-1 h-7 w-full", className)}
                 aria-describedby={`${id}-error`}
                 style={{ paddingLeft: <Icon /> ? "2.5rem" : "1rem" }}
               />
@@ -99,7 +99,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
               id={id}
               name={id}
               defaultValue={defaultValue}
-              className={cn("text-sm pl-8 py-1 h-7 w-full", className)}
+              className={cn("text-sm pl-4 py-1 h-7 w-full", className)}
               aria-describedby={`${id}-error`}
             />
           )}

@@ -11,14 +11,11 @@ import { ElementType } from "react";
 import { IconType } from "react-icons";
 
 export const Navbar = () => {
-  // const searchIconElement: ElementType = <SearchIcon />;
-
   const createPost = useCreatePost();
 
   const onClick = () => {
     createPost.onOpen();
-    // console.log("first");
-    console.log(createPost.isOpen);
+    // console.log(createPost.isOpen);
   };
 
   return (
@@ -34,8 +31,8 @@ export const Navbar = () => {
         "
       >
         {/* Mobile side bar */}
-        <Logo />
-        <div className="w-1/5">
+        <Logo height={30} width={30} className="md:text-lg" />
+        <div className="w-1/3">
           <FormInput
             // icon={Search as IconType}
             searchIcon={<SearchIcon fillColor="#a8b3cf" />}
@@ -49,7 +46,7 @@ export const Navbar = () => {
           <Button
             onClick={onClick}
             variant="default"
-            className="h-12 font-semibold px-7 rounded-lg border border-slate-300"
+            className="h-10 font-semibold px-7 rounded-xl border border-slate-300"
           >
             New Post
           </Button>

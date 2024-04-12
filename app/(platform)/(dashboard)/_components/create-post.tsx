@@ -1,5 +1,8 @@
 "use client";
 
+import { FormInput } from "@/components/form/form-input";
+import { FormSelect } from "@/components/form/form-select";
+import { FormTextarea } from "@/components/form/form-textarea";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -26,41 +29,87 @@ export const CreatePost = () => {
       </DrawerTrigger> */}
       <DrawerContent className="mx-auto my-0">
         {/* h-[95vh] */}
-        <div className="mx-auto w-screen h-[90vh] p-10">
-          <DrawerHeader>
-            <DrawerTitle>Move Goal</DrawerTitle>
-            <DrawerDescription>Set your daily activity goal.</DrawerDescription>
-          </DrawerHeader>
-          <div className="pt-10 pb-0">
-            <div className="flex items-center justify-center ">
-              <Button
-                variant="outline"
-                size="icon"
-                className="h-8 w-8 shrink-0 rounded-full"
-              >
-                <span className="sr-only">Decrease</span>
-              </Button>
-              <div className="flex-1 text-center">
-                <div className="text-7xl font-bold tracking-tighter">test</div>
-                <div className="text-[0.70rem] uppercase text-muted-foreground">
-                  Calories/day
-                </div>
+        <div className="mx-auto w-screen h-[90vh] bg-[#0e1217] p-10 overflow-auto">
+          <div className="">
+            <div className="flex items-center justify-center gap-4 bg-yellow-300">
+              <h2>CONTENT</h2>
+              <h2>PREVIEW</h2>
+            </div>
+
+            <div className="w-1/2 mx-auto my-5 border border-[#2d333c] p-8 rounded-xl">
+              <div className="my-5">
+                <FormSelect
+                  id="category"
+                  className="
+                    bg-[#21262d]
+                    text-neutral-200
+
+                "
+                />
               </div>
-              <Button
-                variant="outline"
-                size="icon"
-                className="h-8 w-8 shrink-0 rounded-full"
-              >
-                <span className="sr-only">Increase</span>
-              </Button>
+
+              <div className="my-5">
+                <FormInput
+                  id="title"
+                  label="Title*"
+                  placeholder="Post title"
+                  required
+                  className="
+                    py-6
+                    w-full
+                    focus:border-[1px]
+                    border-0
+                    border-l-rose-500
+                    focus:border-l-slate-300
+                    caret-sky-600
+                    rounded-xl
+                    focus:ring-0
+                    focus:ring-offset-0
+                    focus:ring-offset-slate-200
+                    focus:ring-slate-300
+                    focus:ring-opacity-50
+                    shadow-inset-left-rose-500
+                    text-lg
+                    text-[#a8b3d0]
+                    hover:text-[#fffff]
+                    hover:bg-[#21262d]
+                    bg-[#1a1f25]
+                    focus:bg-[#21262d]
+                    transition
+                "
+                />
+              </div>
+
+              <div className="my-5">
+                <FormTextarea
+                  id="content"
+                  label="Content*"
+                  placeholder="Post content*"
+                  required
+                  className="
+                  bg-[#1a1f25]
+                    pl-4
+                    border-0
+                    focus:border-[1px]
+                    caret-sky-600
+                    h-56
+                    text-[#a8b3d0]
+                    text-base
+                    rounded-xl
+                    focus:ring-0
+                    focus:ring-offset-0
+                    focus:ring-offset-slate-200
+                    focus:ring-slate-300
+                    focus:ring-opacity-50
+                    hover:bg-[#21262d]
+                    focus:bg-[#21262d]
+                    focus:border-slate-200
+                    transition
+                "
+                />
+              </div>
             </div>
           </div>
-          <DrawerFooter>
-            <Button>Submit</Button>
-            <DrawerClose asChild>
-              <Button variant="outline">Cancel</Button>
-            </DrawerClose>
-          </DrawerFooter>
         </div>
       </DrawerContent>
     </Drawer>

@@ -6,6 +6,12 @@ html,
 body,
 :root {
   height: 100%;
+  /* Reset any default background color */
+  /* background-color: transparent; */
+  /* Apply gradient */
+  background-image: linear-gradient(to right, #11192d, #303e52);
+  /* You can use Tailwind CSS classes directly if configured */
+  /* background-image: linear-gradient(to right, var(--slate-900), var(--slate-700)); */
 }
 
 @layer base {

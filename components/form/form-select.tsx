@@ -11,17 +11,21 @@ import {
 } from "@/components/ui/select";
 import { POST_CATEGORIES } from "@/config/post-categories";
 import { cn } from "@/lib/utils";
+import { IconType } from "react-icons";
 
 interface SelectDemoProps {
   id: string;
   className?: string;
   placeholder?: string;
+  // icon?: React.ReactNode;
+  icon?: IconType;
 }
 
 export function FormSelect({
   id,
   className,
   placeholder = "Select categories your post...",
+  icon: Icon,
 }: SelectDemoProps) {
   return (
     <Select>
@@ -29,11 +33,17 @@ export function FormSelect({
         className="bg-[#1a1f25] text-[#a8b3d0] border-0 focus:border-[2px] pl-4 focus:border-[#ffffff] py-1 hover:text-neutral-100 active:bg-[#2d333c] hover:bg-[#21262e] h-12 rounded-xl transition
       "
       >
-        <SelectValue placeholder={placeholder} />
+        {/* {Icon && <Icon className="text-[#a8b3d0] text-lg" />} */}
+        <div className="flex items-center gap-2">
+          {Icon && <Icon />}
+          <SelectValue placeholder={placeholder} />
+        </div>
       </SelectTrigger>
       <SelectContent className={className}>
         <SelectGroup className="">
-          <SelectLabel className="text-xl">Post categories</SelectLabel>
+          <SelectLabel id={id} className="text-xl">
+            Post categories
+          </SelectLabel>
           {POST_CATEGORIES.map((category) => (
             <SelectItem
               id={id}
@@ -43,6 +53,10 @@ export function FormSelect({
               textValue="test"
               value={category.value}
             >
+              {/* //! if we lack of name or id we get null value
+               */}
+              <input hidden value={category.value} id={id} name={id} />
+
               {category.label}
             </SelectItem>
           ))}

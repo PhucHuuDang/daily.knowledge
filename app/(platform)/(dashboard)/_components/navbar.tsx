@@ -4,14 +4,15 @@ import { FormInput } from "@/components/form/form-input";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { SearchIcon } from "@/components/ui/search-icon";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useCreatePost } from "@/hooks/use-create-post";
-import { UserButton } from "@clerk/nextjs";
-import { Bell, Search } from "lucide-react";
-import { ElementType } from "react";
-import { IconType } from "react-icons";
+import { UserButton, useSignIn } from "@clerk/nextjs";
+import { Bell } from "lucide-react";
 
 export const Navbar = () => {
   const createPost = useCreatePost();
+
+  const { isLoaded } = useSignIn();
 
   const onClick = () => {
     createPost.onOpen();
@@ -55,17 +56,21 @@ export const Navbar = () => {
             <Bell className=" text-slate-400 group-hover:text-slate-100" />
           </div>
 
-          <UserButton
-            afterSignOutUrl="/"
-            appearance={{
-              elements: {
-                avatarBox: {
-                  height: 30,
-                  width: 30,
+          {isLoaded ? (
+            <UserButton
+              afterSignOutUrl="/"
+              appearance={{
+                elements: {
+                  avatarBox: {
+                    height: 32,
+                    width: 32,
+                  },
                 },
-              },
-            }}
-          />
+              }}
+            />
+          ) : (
+            <Skeleton className="rounded-full h-8 w-8" />
+          )}
         </div>
       </div>
     </div>

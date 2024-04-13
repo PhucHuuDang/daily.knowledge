@@ -5,6 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { useFormStatus } from "react-dom";
 import { Label } from "../ui/label";
 import { cn } from "@/lib/utils";
+import { FormErrors } from "./form-errors";
 
 interface FormTextareaProps {
   id: string;
@@ -53,6 +54,8 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>(
           <Textarea
             ref={ref}
             id={id}
+            // ! if we lack of the name that will get null value
+            name={id}
             placeholder={placeholder}
             onKeyDown={onKeydown}
             disabled={disabled || pending}
@@ -66,6 +69,7 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextareaProps>(
             area-aria-describedby={`${id}-error`}
           />
         </div>
+        <FormErrors errors={errors} id={id} />
       </div>
     );
   }

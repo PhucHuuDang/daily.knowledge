@@ -5,7 +5,7 @@ const NewsIdPage = ({ params }: { params: { newsId: string } }) => {
 
   // const user = await currentUser();
 
-  // console.log(test);
+  // console.log(params.newsId);
 
   return <div className="text-slate-300">NewsIdPage: {params.newsId}</div>;
 };

@@ -20,8 +20,16 @@ import { FormSubmit } from "@/components/form/form-submit";
 import { Newspaper } from "lucide-react";
 import { IconType } from "react-icons";
 
+import { createEditor } from "slate";
+import { Slate, Editable, withReact } from "slate-react";
+import { useState } from "react";
+import RichTextExample from "@/components/form/form-text-editor";
+
 export const CreatePost = () => {
   const createPost = useCreatePost();
+  const [editor] = useState(() => withReact(createEditor()));
+
+  // console.log(editor);
 
   const isOpen = useCreatePost((state) => state.isOpen);
 
@@ -35,6 +43,12 @@ export const CreatePost = () => {
     console.log(content);
     console.log({ category });
   };
+  const initialValue = [
+    {
+      type: "paragraph",
+      children: [{ text: "A line of text in a paragraph." }],
+    },
+  ];
 
   return (
     <Drawer shouldScaleBackground open={isOpen} onOpenChange={onOpenChange}>
@@ -43,7 +57,7 @@ export const CreatePost = () => {
       </DrawerTrigger> */}
 
       <Tabs defaultValue="content">
-        <DrawerContent className="mx-auto bg-slate-400/20  border-slate-400 border-b-0 border-l-0 rounded-xl">
+        <DrawerContent className="mx-auto bg-[#0e1217] border-slate-400 border-b-0 border-l-0 rounded-xl">
           {/* h-[95vh] */}
           <div className="mx-auto w-screen h-[90vh] bg-[#0e1217] p-10 overflow-auto">
             {/* <div className=""> */}
@@ -141,6 +155,16 @@ export const CreatePost = () => {
                         transition
                 "
                   />
+                </div>
+                {/* 
+                <div>
+                  <Slate editor={editor} initialValue={initialValue}>
+                    <Editable className="bg-white" />
+                  </Slate>
+                </div> */}
+
+                <div className="my-8 p-3 rounded-xl">
+                  <RichTextExample editorProps={editor} />
                 </div>
               </form>
             </TabsContent>

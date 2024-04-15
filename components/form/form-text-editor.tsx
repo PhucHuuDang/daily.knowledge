@@ -18,7 +18,6 @@ import {
   Icon,
   Toolbar,
 } from "@/app/(platform)/(dashboard)/_components/components";
-import { IconType } from "react-icons";
 import {
   AlignCenter,
   AlignJustify,
@@ -83,7 +82,8 @@ const RichTextExample = ({ editorProps, id }: RichTextProps) => {
   const renderLeaf = useCallback((props: any) => <Leaf {...props} />, []);
   // const editor = useMemo(() => withHistory(withReact(createEditor())), []);
   // const editor = useMemo(() => withReact(createEditor())), []);
-  const [editor, setEditTor] = useState(() => withReact(createEditor()));
+  const [editor] = useState(() => withReact(createEditor()));
+  const editorHook = useMemo(() => withReact(createEditor()), []);
   const [value, setValue] = useState<Descendant[]>([]);
 
   console.log({ editor });
@@ -102,19 +102,7 @@ const RichTextExample = ({ editorProps, id }: RichTextProps) => {
       initialValue={initialValue}
     >
       <Toolbar>
-        {/* <MarkButton format="bold" icon={Bold as IconType} />
-        <MarkButton format="italic" icon={Italic as IconType} />
-        <MarkButton format="underline" icon={Underline as IconType} />
-        <MarkButton format="code" icon={Code as IconType} />
-        <BlockButton format="heading-one" icon={Heading1 as IconType} />
-        <BlockButton format="heading-two" icon={Heading2 as IconType} />
-        <BlockButton format="block-quote" icon={Quote as IconType} />
-        <BlockButton format="numbered-list" icon={ListOrdered as IconType} />
-        <BlockButton format="bulleted-list" icon={List as IconType} />
-        <BlockButton format="left" icon={AlignLeft as IconType} />
-        <BlockButton format="center" icon={AlignCenter as IconType} />
-        <BlockButton format="right" icon={AlignRight as IconType} />
-        <BlockButton format="justify" icon={AlignJustify as IconType} /> */}
+       
         {MARK_BUTTON_ICON.map(({ format, icon }) => (
           <MarkButton key={format} format={format} icon={icon} />
         ))}

@@ -56,7 +56,7 @@ export const CreatePost = () => {
         <Button variant="outline">Open Drawer</Button>
       </DrawerTrigger> */}
 
-      <Tabs defaultValue="content">
+      <Tabs defaultValue="content-part">
         <DrawerContent className="mx-auto bg-[#0e1217] border-slate-400 border-b-0 border-l-0 rounded-xl">
           {/* h-[95vh] */}
           <div className="mx-auto w-screen h-[90vh] bg-[#0e1217] p-10 overflow-auto">
@@ -65,20 +65,20 @@ export const CreatePost = () => {
               {/* <div className="w-1/2 mx-auto my-5 flex items-center text-white gap-x-10"> */}
               <TabsTrigger
                 className="data-[state=active]:bg-slate-200/20 data-[state=active]:text-[#fff] data-[state=active]:shadow-sm"
-                value="content"
+                value="content-part"
               >
                 CONTENT
               </TabsTrigger>
               <TabsTrigger
                 className="data-[state=active]:bg-slate-200/20 data-[state=active]:text-[#fff] data-[state=active]:shadow-md"
-                value="preview"
+                value="preview-part"
               >
                 PREVIEW
               </TabsTrigger>
               {/* </div> */}
             </TabsList>
 
-            <TabsContent value="content">
+            <TabsContent value="content-part">
               <form
                 action={onSubmit}
                 className="w-1/2 mx-auto my-5 border border-[#2d333c] p-8 rounded-xl"
@@ -169,7 +169,7 @@ export const CreatePost = () => {
               </form>
             </TabsContent>
             {/* </div> */}
-            <TabsContent value="preview">
+            <TabsContent value="preview-part">
               <PreviewContent />
             </TabsContent>
           </div>

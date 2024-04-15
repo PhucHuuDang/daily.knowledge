@@ -20,13 +20,16 @@ export default authMiddleware({
       return redirectToSignIn({ returnBackUrl: req.url });
     }
 
+    // console.log(req.nextUrl.pathname);
+
     if (
       auth.userId &&
       !auth.orgId &&
-      req.url !== process.env.NEXT_PUBLIC_URL_SELECT_ORG
+      req.nextUrl.pathname !== process.env.NEXT_PUBLIC_URL_SELECT_ORG
     ) {
       const orgSelection = new URL(
-        process.env.NEXT_PUBLIC_URL_SELECT_ORG!,
+        // process.env.NEXT_PUBLIC_URL_SELECT_ORG!,
+        auth.userId,
         req.url
       );
 

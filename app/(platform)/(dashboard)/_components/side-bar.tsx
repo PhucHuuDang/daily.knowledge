@@ -11,13 +11,8 @@ import {
   User,
 } from "lucide-react";
 import { useState } from "react";
-import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+
 import { NavbarItem } from "./nav-item";
 
 const NAVIGATION_SIDEBAR = [
@@ -82,11 +77,11 @@ export const Sidebar = () => {
             } transition duration-200 cursor-pointer`}
           />
           <span className="invisible w-24 inline-flex absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-slate-200 px-2 py-1.5 text-xs font-medium text-neutral-700 group-hover/arrow:visible duration-200 ease-in-out text-center">
-            Close
+            {toggleSidebar ? "Close sidebar" : "Open sidebar"}
           </span>
         </div>
 
-        <div className="mt-5">
+        <div className="mt-10">
           <NavbarItem
             route="/news/org_2eoNiBI0HXBF8Wg8bpYGz2EdzMv"
             label="My feed"
@@ -100,6 +95,13 @@ export const Sidebar = () => {
         </div>
 
         <div className="mt-10">
+          <div
+            className={`${
+              toggleSidebar ? "visible" : "invisible"
+            } px-4 text-[#707a8c] text-sm font-semibold mb-2`}
+          >
+            Censor
+          </div>
           <NavbarItem
             route="/news/org_2eoNiBI0HXBF8Wg8bpYGz2EdzMv"
             label="Post Censored?"

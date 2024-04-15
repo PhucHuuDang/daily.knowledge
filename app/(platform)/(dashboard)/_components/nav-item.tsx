@@ -30,7 +30,7 @@ export const NavbarItem = ({
 
   return (
     <Tooltip>
-      <div className="w-full hover:bg-[#2d323b]  cursor-pointer">
+      <div className="w-full hover:bg-[#2d323b] py-1 cursor-pointer">
         <TooltipTrigger className="px-2 text-slate-200 flex items-center gap-1 w-full py-1">
           {/* <div className="h-6 w-6 mx-2">
             <Icon />

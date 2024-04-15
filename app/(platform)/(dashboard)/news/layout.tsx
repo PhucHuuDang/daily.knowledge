@@ -10,7 +10,7 @@ const NewsLayout = ({ children }: { children: React.ReactNode }) => {
             <Sidebar />
           </TooltipProvider>
         </div>
-        <div className="px-8 md:px-16 pt-10">{children}</div>
+        <div className="px-8 md:px-16 pt-20 md:pt-24">{children}</div>
       </div>
     </div>
   );

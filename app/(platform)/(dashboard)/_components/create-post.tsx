@@ -24,6 +24,7 @@ import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 import { useState } from "react";
 import RichTextExample from "@/components/form/form-text-editor";
+import { ImageUpload } from "../news/[newsId]/_components/image-upload";
 
 export const CreatePost = () => {
   const createPost = useCreatePost();
@@ -84,6 +85,10 @@ export const CreatePost = () => {
                 className="w-1/2 mx-auto my-5 border border-[#2d333c] p-8 rounded-xl"
               >
                 <FormSubmit>Submit</FormSubmit>
+
+                <div className="my-5">
+                  <ImageUpload />
+                </div>
 
                 <div className="my-5">
                   <FormSelect
@@ -163,9 +168,9 @@ export const CreatePost = () => {
                   </Slate>
                 </div> */}
 
-                <div className="my-8 p-3 rounded-xl">
-                  <RichTextExample editorProps={editor} />
-                </div>
+                {/* <div className="my-8 p-3 rounded-xl">
+                      <RichTextExample editorProps={editor} />
+                    </div> */}
               </form>
             </TabsContent>
             {/* </div> */}

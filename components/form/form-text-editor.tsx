@@ -86,7 +86,7 @@ const RichTextExample = ({ editorProps, id }: RichTextProps) => {
   const editorHook = useMemo(() => withReact(createEditor()), []);
   const [value, setValue] = useState<Descendant[]>([]);
 
-  console.log({ editor });
+  // console.log({ editor });
   // console.log({ renderLeaf });
   // console.log({ renderElement });
 
@@ -95,14 +95,13 @@ const RichTextExample = ({ editorProps, id }: RichTextProps) => {
       editor={(editor as any) || (editorProps as any)}
       onChange={(newValue) => {
         setTimeout(() => {
-          console.log({ newValue });
+          // console.log({ newValue });
           setValue(newValue as any);
         }, 3000);
       }}
       initialValue={initialValue}
     >
       <Toolbar>
-       
         {MARK_BUTTON_ICON.map(({ format, icon }) => (
           <MarkButton key={format} format={format} icon={icon} />
         ))}

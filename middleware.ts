@@ -8,7 +8,7 @@ export default authMiddleware({
 
       if (auth.orgId) {
         path = process.env.NEXT_PUBLIC_URL_NEWS + "/" + auth.orgId;
-        console.log(path);
+        console.log({ path });
       }
 
       const orgSelection = new URL(path!, req.url);

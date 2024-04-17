@@ -1,22 +1,22 @@
 export const POST_CATEGORIES = [
   {
     label: "TECHNOLOGY",
-    value: "technology",
+    value: "TECHNOLOGY",
   },
   {
     label: "SHARE",
-    value: "share",
+    value: "SHARE",
   },
   {
     label: "QUESTION",
-    value: "question",
+    value: "QUESTION",
   },
   {
     label: "OTHER",
-    value: "other",
+    value: "OTHER",
   },
   {
     label: "NEW LIBRARY",
-    value: "new-library",
+    value: "NEW LIBRARY",
   },
 ];

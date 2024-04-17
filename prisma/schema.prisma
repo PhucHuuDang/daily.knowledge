@@ -29,7 +29,7 @@ model Author {
   id      String   @id @default(uuid())
   name    String
   email   String
-  image   String
+  image   String   @db.Text
   posts   Post[]
   profile Profile?
   role    Role     @default(USER)
@@ -66,7 +66,7 @@ model Post {
 
 model Comment {
   id        String   @id @default(uuid())
-  content   String
+  content   String   @db.Text
   post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId    String
   createdAt DateTime @default(now())

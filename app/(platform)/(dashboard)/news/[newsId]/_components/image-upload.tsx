@@ -26,8 +26,7 @@ export const ImageUpload = ({ value, onChange }: ImageUploadProps) => {
       uploadPreset="wowmbflf"
     >
       {({ cloudinary, open }) => {
-        console.log(cloudinary);
-        // console.log(widget);
+        // console.table(cloudinary);
 
         return (
           <div

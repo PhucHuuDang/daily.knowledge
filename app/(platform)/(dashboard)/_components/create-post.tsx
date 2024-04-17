@@ -40,9 +40,7 @@ export const CreatePost = () => {
     const test = formData.get("title");
     const content = formData.get("content") as string;
     const category = formData.get("category");
-    console.log(test);
-    console.log(content);
-    console.log({ category });
+    console.log({ category, test, content });
   };
   const initialValue = [
     {

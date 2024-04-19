@@ -1,6 +1,9 @@
 "use client";
 
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useAuth, useClerk, useOrganizationList, useUser } from "@clerk/nextjs";
+
 import {
   ChevronLeft,
   LayoutDashboard,
@@ -10,7 +13,6 @@ import {
   ShieldQuestion,
   User,
 } from "lucide-react";
-import { useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { NavbarItem } from "./nav-item";
@@ -35,6 +37,8 @@ const NAVIGATION_SIDEBAR = [
 
 export const Sidebar = () => {
   const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
+  const { signOut } = useClerk();
+  const router = useRouter();
 
   const { user } = useUser();
 
@@ -134,31 +138,32 @@ export const Sidebar = () => {
       </div>
 
       <div className="sticky inset-x-0 bottom-0 border-t border-[#2d323b] bg-slate-900  p-2">
-        <form action="#">
-          <button
-            type="submit"
-            className="group relative flex w-full justify-center rounded-lg px-2 py-1.5 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+        {/* <form action="#"> */}
+        <button
+          // type="submit"
+          onClick={() => signOut(() => router.push("/"))}
+          className="group relative flex w-full justify-center rounded-lg px-2 py-1.5 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="size-5 opacity-75"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="size-5 opacity-75"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-              />
-            </svg>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+            />
+          </svg>
 
-            <span className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
-              Logout
-            </span>
-          </button>
-        </form>
+          <span className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
+            Logout
+          </span>
+        </button>
+        {/* </form> */}
       </div>
     </div>
   );

@@ -5,8 +5,6 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { LayoutDashboard, Settings } from "lucide-react";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { IconType } from "react-icons";
 
@@ -15,7 +13,9 @@ interface NavbarItemProps {
   icon?: IconType;
   label: string;
   children?: React.ReactNode;
-  route: string;
+  route?: string;
+  delayDuration?: number;
+  onClick?: () => void;
 }
 
 export const NavbarItem = ({
@@ -24,14 +24,21 @@ export const NavbarItem = ({
   label,
   children,
   route,
+  delayDuration,
+  onClick,
 }: NavbarItemProps) => {
   const router = useRouter();
   const pathname = usePathname();
 
   return (
-    <Tooltip>
+    <Tooltip delayDuration={delayDuration}>
       <div className="w-full hover:bg-[#2d323b] py-1 cursor-pointer">
-        <TooltipTrigger className="px-2 text-slate-200 flex items-center gap-1 w-full py-1">
+        <TooltipTrigger
+          className="px-2 hover:text-slate-100 text-[#a8b3cf] flex items-center gap-1 w-full py-1"
+          onClick={() => {
+            console.log(route), onClick?.();
+          }}
+        >
           {/* <div className="h-6 w-6 mx-2">
             <Icon />
           </div> */}

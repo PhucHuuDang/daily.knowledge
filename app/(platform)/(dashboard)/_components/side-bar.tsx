@@ -2,38 +2,20 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useAuth, useClerk, useOrganizationList, useUser } from "@clerk/nextjs";
+import { useClerk, useOrganizationList, useUser } from "@clerk/nextjs";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import {
   ChevronLeft,
-  LayoutDashboard,
-  Newspaper,
+  LogOut,
   Pencil,
   Settings,
   ShieldQuestion,
   User,
 } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { NavbarItem } from "./nav-item";
-
-const NAVIGATION_SIDEBAR = [
-  {
-    title: "Settings",
-    icon: <Settings />,
-    route: "/news/org_2eoNiBI0HXBF8Wg8bpYGz2EdzMv",
-  },
-  {
-    title: "Edit Post",
-    icon: <Pencil />,
-    route: "/news/org_2eoNiBI0HXBF8Wg8bpYGz2EdzMv/edit",
-  },
-  {
-    title: "Users",
-    icon: <User />,
-    route: "/user",
-  },
-];
 
 export const Sidebar = () => {
   const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
@@ -48,9 +30,31 @@ export const Sidebar = () => {
     },
   });
 
+  const NAVIGATION_SIDEBAR = [
+    {
+      title: "Settings",
+      icon: <Settings />,
+      route: "/news/org_2eoNiBI0HXBF8Wg8bpYGz2EdzMv",
+    },
+    {
+      title: "Edit Post",
+      icon: <Pencil />,
+      route: "/news/org_2eoNiBI0HXBF8Wg8bpYGz2EdzMv/edit",
+    },
+    {
+      title: "Users",
+      icon: <User />,
+      route: "/user",
+    },
+  ];
+
+  const onSignOut = () => {
+    signOut(() => router.push("/"));
+  };
+
   return (
     <div
-      className={`group/sidebar relative flex  no-scrollbar h-screen ${
+      className={`group/sidebar relative flex h-screen ${
         toggleSidebar ? "w-64" : "w-16"
       } flex-col justify-between border-e border-[#3d3f43] bg-slate-900 duration-300 `}
     >
@@ -137,33 +141,15 @@ export const Sidebar = () => {
         </div>
       </div>
 
-      <div className="sticky inset-x-0 bottom-0 border-t border-[#2d323b] bg-slate-900  p-2">
-        {/* <form action="#"> */}
-        <button
-          // type="submit"
-          onClick={() => signOut(() => router.push("/"))}
-          className="group relative flex w-full justify-center rounded-lg px-2 py-1.5 text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700"
+      <div className="sticky inset-x-0 bottom-0 border-t border-[#2d323b] bg-slate-900 transition">
+        <NavbarItem
+          label="Logout"
+          toggleSidebar={toggleSidebar}
+          onClick={onSignOut}
+          delayDuration={200}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="size-5 opacity-75"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
-            />
-          </svg>
-
-          <span className="invisible absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-gray-900 px-2 py-1.5 text-xs font-medium text-white group-hover:visible">
-            Logout
-          </span>
-        </button>
-        {/* </form> */}
+          <LogOut className="w-6 h-5" />
+        </NavbarItem>
       </div>
     </div>
   );

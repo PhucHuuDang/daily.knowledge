@@ -2,6 +2,7 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BackgroundGradient } from "@/components/ui/background-gradient";
+import { Skeleton } from "@/components/ui/skeleton";
 import { useUser } from "@clerk/nextjs";
 import {
   Bookmark,
@@ -21,11 +22,30 @@ export const PostItem = ({}: PostItemProps) => {
   const text =
     "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisctempora maxime quaerat, eveniet iure sint deleæctus sunt quas non esse praesentium, architecto tenetur ullam suscipit";
 
+  //? try to use it hover:bg-opacity-0
+
+  // * use Skeleton for client side rendering when pending data
+  // if (true) {
+  //   return <PostItem.Skeleton />;
+  // }
+
   return (
     <div>
       <BackgroundGradient
-        className="rounded-3xl my-1 max-w-sm px-2 py-2 duration-200 bg-zinc-900 mx-1 dark:bg-zinc-900 object-cover hover:cursor-pointer"
-        containerClassName="w-[90%]"
+        className="
+          rounded-3xl
+          my-1
+          max-w-sm
+          px-2
+          py-2
+          bg-zinc-900
+          hover:bg-opacity-95
+          mx-1
+          dark:bg-zinc-900
+          object-cover
+          hover:cursor-pointer
+          duration-200"
+        containerClassName="w-full "
       >
         {/* <div className="bg-red-500"> */}
 
@@ -62,6 +82,31 @@ export const PostItem = ({}: PostItemProps) => {
 
         {/* </div> */}
       </BackgroundGradient>
+    </div>
+  );
+};
+
+PostItem.Skeleton = function PostSkeleton() {
+  return (
+    <div className="rounded-3xl my-1 max-w-sm px-2 py-2 bg-zinc-900 mx-1 object-cover hover:cursor-pointer">
+      <div className="flex items-center gap-2 my-2">
+        <Skeleton className="h-8 w-8 rounded-full" />
+
+        <div className="flex flex-col gap-y-2">
+          <Skeleton className="w-16 h-2" />
+          <Skeleton className="w-32 h-2" />
+        </div>
+      </div>
+      <Skeleton className="min-h-14 w-full" />
+
+      <Skeleton className="object-contain rounded-2xl h-[180px] w-full my-4 text-slate-200" />
+
+      <div className="flex items-center justify-between my-2 px-4">
+        <Skeleton className="h-7 w-7 rounded-md p-1" />
+        <Skeleton className="h-7 w-7 rounded-md p-1" />
+        <Skeleton className="h-7 w-7 rounded-md p-1" />
+        <Skeleton className="h-7 w-7 rounded-md p-1" />
+      </div>
     </div>
   );
 };

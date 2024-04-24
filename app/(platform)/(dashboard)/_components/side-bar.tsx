@@ -48,13 +48,15 @@ export const Sidebar = () => {
     },
   ];
 
+  const sidebarWidth = toggleSidebar ? "w-64" : "w-16";
+
   const onSignOut = () => {
     signOut(() => router.push("/"));
   };
 
   return (
     <div
-      className={`group/sidebar relative flex h-screen pt-20 md:pt-16 ${
+      className={`group/sidebar relative flex h-full 2xl:min-h-screen pt-20 md:pt-16 ${
         toggleSidebar ? "w-64" : "w-16"
       } flex-col justify-between border-e border-[#3d3f43] bg-slate-900 duration-300 `}
     >
@@ -91,6 +93,7 @@ export const Sidebar = () => {
         </div>
 
         <div className="mt-10">
+          {/* <div className={`fixed ${sidebarWidth} `}> */}
           <NavbarItem
             route="/news/org_2eoNiBI0HXBF8Wg8bpYGz2EdzMv"
             label="My feed"
@@ -101,8 +104,10 @@ export const Sidebar = () => {
               <AvatarFallback />
             </Avatar>
           </NavbarItem>
+          {/* </div> */}
         </div>
 
+        {/* <div className={`mt-10 fixed ${sidebarWidth}`}> */}
         <div className="mt-10">
           <div
             className={`${

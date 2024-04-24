@@ -32,7 +32,7 @@ export const NavbarItem = ({
 
   return (
     <Tooltip delayDuration={delayDuration}>
-      <div className="w-full hover:bg-[#2d323b] py-1 cursor-pointer">
+      <div className="w-full hover:bg-[#2d323b] py-1 cursor-pointer duration-150">
         <TooltipTrigger
           className="px-2 hover:text-slate-100 text-[#a8b3cf] flex items-center gap-1 w-full py-1"
           onClick={() => {

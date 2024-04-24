@@ -20,7 +20,7 @@ export const Navbar = () => {
   };
 
   return (
-    <div className="fixed top-0 z-50 flex items-center justify-between w-full px-2 md:px-3 shadow-sm border-b border-[#3d3f43]">
+    <div className="fixed top-0 z-50 flex bg-gradient-to-r from-slate-900 to-slate-700 items-center justify-between w-full px-2 md:px-3 shadow-sm border-b border-[#3d3f43]">
       <div
         className="
         flex

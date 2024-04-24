@@ -54,7 +54,7 @@ export const Sidebar = () => {
 
   return (
     <div
-      className={`group/sidebar relative flex h-screen ${
+      className={`group/sidebar relative flex h-screen pt-20 md:pt-16 ${
         toggleSidebar ? "w-64" : "w-16"
       } flex-col justify-between border-e border-[#3d3f43] bg-slate-900 duration-300 `}
     >
@@ -71,13 +71,14 @@ export const Sidebar = () => {
             absolute
             -right-3
             rounded-lg
-            top-3
+            top-20
             z-3
             invisible
             opacity-0
             transition-opacity
             group-hover/sidebar:visible
-            group-hover/sidebar:opacity-100"
+            group-hover/sidebar:opacity-100
+            "
         >
           <ChevronLeft
             className={`${

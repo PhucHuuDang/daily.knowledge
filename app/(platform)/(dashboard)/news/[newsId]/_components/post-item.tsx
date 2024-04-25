@@ -55,7 +55,7 @@ export const PostItem = ({}: PostItemProps) => {
       >
         {/* <div className="bg-red-500"> */}
 
-        <div className="absolute top-4 right-2 flex items-center gap-x-2">
+        <div className="absolute top-4 right-2 flex items-center gap-x-1 2xl:gap-x-2">
           <Button
             className="
               bg-slate-100
@@ -64,9 +64,10 @@ export const PostItem = ({}: PostItemProps) => {
               group-hover/post:visible
               hover:bg-slate-300
               font-semibold
-              hover:bg-opacity-95
               py-1
               px-2
+              md:h-8
+              
               rounded-lg
               duration-200
           "
@@ -74,7 +75,7 @@ export const PostItem = ({}: PostItemProps) => {
             Read post <ExternalLink className="ml-1 h-5 w-5" />
           </Button>
 
-          <EllipsisVertical className="h-10 w-10 p-1 rounded-xl invisible group-hover/post:visible hover:bg-[#21262d] duration-200" />
+          <EllipsisVertical className="w-8 h-8 2xl:h-10 2xl:w-10 p-1 rounded-xl invisible group-hover/post:visible hover:bg-[#21262d] duration-200" />
         </div>
 
         <div className="flex items-center gap-2 my-2">

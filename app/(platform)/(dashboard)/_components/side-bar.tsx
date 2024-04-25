@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import {  useOrganizationList, useUser } from "@clerk/nextjs";
+import { useOrganizationList, useUser } from "@clerk/nextjs";
 import { useSignOutDialog } from "@/hooks/use-sign-out-alert-dialog";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -142,7 +142,7 @@ export const Sidebar = () => {
         </div>
       </div>
       <div
-        className={`fixed inset-x-0 z-20 bottom-0 border-t border-[#2d323b] bg-slate-900 ${sidebarWidth} transition duration-300`}
+        className={`fixed inset-x-0 z-20 bottom-0  border-t border-[#2d323b] border-r border-r-[#3d3f43] bg-slate-900 ${sidebarWidth} duration-300`}
       >
         <NavbarItem
           label="Logout"

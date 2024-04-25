@@ -2,10 +2,13 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BackgroundGradient } from "@/components/ui/background-gradient";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useUser } from "@clerk/nextjs";
 import {
   Bookmark,
+  EllipsisVertical,
+  ExternalLink,
   Heart,
   Link as LinkLucid,
   MessageCircleMore,
@@ -34,20 +37,45 @@ export const PostItem = ({}: PostItemProps) => {
       <BackgroundGradient
         className="
           rounded-3xl
+          group/post
           my-1
           max-w-sm
           px-2
           py-2
           bg-zinc-900
-          hover:bg-opacity-95
+          hover:bg-opacity-[0.93]
           mx-1
           dark:bg-zinc-900
           object-cover
           hover:cursor-pointer
-          duration-200"
+          duration-200
+          relative
+          "
         containerClassName="w-full "
       >
         {/* <div className="bg-red-500"> */}
+
+        <div className="absolute top-4 right-2 flex items-center gap-x-2">
+          <Button
+            className="
+              bg-slate-100
+              text-slate-800
+              invisible
+              group-hover/post:visible
+              hover:bg-slate-300
+              font-semibold
+              hover:bg-opacity-95
+              py-1
+              px-2
+              rounded-lg
+              duration-200
+          "
+          >
+            Read post <ExternalLink className="ml-1 h-5 w-5" />
+          </Button>
+
+          <EllipsisVertical className="h-10 w-10 p-1 rounded-xl invisible group-hover/post:visible hover:bg-[#21262d] duration-200" />
+        </div>
 
         <div className="flex items-center gap-2 my-2">
           <Avatar className="h-8 w-8 rounded-full flex">

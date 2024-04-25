@@ -56,11 +56,9 @@ export const Sidebar = () => {
 
   return (
     <div
-      className={`group/sidebar relative flex h-full 2xl:min-h-screen pt-20 md:pt-16 ${
-        toggleSidebar ? "w-64" : "w-16"
-      } flex-col justify-between border-e border-[#3d3f43] bg-slate-900 duration-300 `}
+      className={`group/sidebar relative flex h-full 2xl:min-h-screen pt-20 md:pt-16 ${sidebarWidth} flex-col justify-between border-e border-[#3d3f43] bg-slate-900 duration-300`}
     >
-      <div>
+      <div className={`fixed ${sidebarWidth} z-20 duration-300`}>
         <div
           onClick={() => setToggleSidebar((newValue) => !newValue)}
           className="
@@ -73,7 +71,7 @@ export const Sidebar = () => {
             absolute
             -right-3
             rounded-lg
-            top-20
+            top-3.5
             z-3
             invisible
             opacity-0
@@ -92,7 +90,7 @@ export const Sidebar = () => {
           </span>
         </div>
 
-        <div className="mt-10">
+        <div className="mt-14">
           {/* <div className={`fixed ${sidebarWidth} `}> */}
           <NavbarItem
             route="/news/org_2eoNiBI0HXBF8Wg8bpYGz2EdzMv"
@@ -147,7 +145,9 @@ export const Sidebar = () => {
         </div>
       </div>
 
-      <div className="sticky inset-x-0 bottom-0 border-t border-[#2d323b] bg-slate-900 transition">
+      <div
+        className={`fixed inset-x-0 bottom-0 border-t border-[#2d323b] bg-slate-900 ${sidebarWidth} transition`}
+      >
         <NavbarItem
           label="Logout"
           toggleSidebar={toggleSidebar}

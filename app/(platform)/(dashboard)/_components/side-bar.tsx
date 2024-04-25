@@ -2,7 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useClerk, useOrganizationList, useUser } from "@clerk/nextjs";
+import {  useOrganizationList, useUser } from "@clerk/nextjs";
+import { useSignOutDialog } from "@/hooks/use-sign-out-alert-dialog";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
@@ -19,10 +20,10 @@ import { NavbarItem } from "./nav-item";
 
 export const Sidebar = () => {
   const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
-  const { signOut } = useClerk();
   const router = useRouter();
 
   const { user } = useUser();
+  const useSignOut = useSignOutDialog();
 
   const { userMemberships, isLoaded: isLoadedOrgList } = useOrganizationList({
     userMemberships: {
@@ -53,10 +54,6 @@ export const Sidebar = () => {
   const translateText = toggleSidebar
     ? "translate-x-0"
     : "-translate-x-20 duration-400";
-
-  const onSignOut = () => {
-    signOut(() => router.push("/"));
-  };
 
   return (
     <div
@@ -144,14 +141,13 @@ export const Sidebar = () => {
           </ul>
         </div>
       </div>
-
       <div
-        className={`fixed inset-x-0 z-20 bottom-0 border-t border-[#2d323b] bg-slate-900 ${sidebarWidth} transition`}
+        className={`fixed inset-x-0 z-20 bottom-0 border-t border-[#2d323b] bg-slate-900 ${sidebarWidth} transition duration-300`}
       >
         <NavbarItem
           label="Logout"
           toggleSidebar={toggleSidebar}
-          onClick={onSignOut}
+          onClick={useSignOut.onOpen}
           delayDuration={200}
         >
           <LogOut className="w-6 h-5" />

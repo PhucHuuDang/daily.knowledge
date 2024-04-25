@@ -10,7 +10,7 @@ const NewsLayout = ({ children }: { children: React.ReactNode }) => {
           <div className="w-auto shrink-0 md:block hidden ">
             <Sidebar />
           </div>
-          <div className="pt-20 md:pt-24 w-full ">{children}</div>
+          <div className="pt-14 w-full ">{children}</div>
         </TooltipProvider>
       </div>
     </div>

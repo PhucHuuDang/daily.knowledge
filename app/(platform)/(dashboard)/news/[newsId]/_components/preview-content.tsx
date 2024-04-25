@@ -4,19 +4,20 @@ import { FormTextarea } from "@/components/form/form-textarea";
 
 export const PreviewContent = () => {
   return (
-    <div className="w-1/2 mx-auto my-5 border border-[#2d333c] p-8 rounded-xl">
-      <div className="my-5">
+    <div className="w-1/2 mx-auto my-5 border bg-slate-200/5 border-[#454f5e] p-8 rounded-xl shadow-2xl">
+      <div className="my-5 relative z-10">
         <FormSelect
           id="category"
           className="
             bg-[#21262d]
             text-neutral-200
+            
 
         "
         />
       </div>
 
-      <div className="my-5">
+      <div className="my-5 relative z-10">
         <FormInput
           id="title"
           label="Title*"
@@ -48,7 +49,7 @@ export const PreviewContent = () => {
         />
       </div>
 
-      <div className="my-5">
+      <div className="my-5 relative z-10">
         <FormTextarea
           id="content"
           label="Content*"

@@ -1,9 +1,11 @@
-
+import CreateNewsRoute from "./_components/create-news-route";
 
 const CreateNewsPage = () => {
-    return ( 
-        <div>Create new Page</div>
-     );
-}
- 
+  return (
+    <>
+      <CreateNewsRoute />
+    </>
+  );
+};
+
 export default CreateNewsPage;

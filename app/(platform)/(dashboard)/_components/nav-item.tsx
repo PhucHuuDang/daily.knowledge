@@ -45,7 +45,11 @@ export const NavbarItem = ({
           <div className="mx-2">{children}</div>
           {/* <Icon className="h-6 w-6 mx-2" /> */}
 
-          <div className={`${toggleSidebar ? "block" : "hidden"} text-sm `}>
+          <div
+            className={`${
+              toggleSidebar ? "block opacity-100" : "hidden opacity-0"
+            } text-sm min-w-28 overflow-hidden flex items-start rounded-md duration-200`}
+          >
             {label}
           </div>
         </TooltipTrigger>

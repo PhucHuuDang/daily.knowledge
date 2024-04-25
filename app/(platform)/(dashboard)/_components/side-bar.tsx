@@ -49,6 +49,10 @@ export const Sidebar = () => {
   ];
 
   const sidebarWidth = toggleSidebar ? "w-64" : "w-16";
+  // translate-x
+  const translateText = toggleSidebar
+    ? "translate-x-0"
+    : "-translate-x-20 duration-400";
 
   const onSignOut = () => {
     signOut(() => router.push("/"));
@@ -58,7 +62,7 @@ export const Sidebar = () => {
     <div
       className={`group/sidebar relative flex h-full 2xl:min-h-screen pt-20 md:pt-16 ${sidebarWidth} flex-col justify-between border-e border-[#3d3f43] bg-slate-900 duration-300`}
     >
-      <div className={`fixed ${sidebarWidth} z-20 duration-300`}>
+      <div className={`fixed ${sidebarWidth} z-20  duration-300`}>
         <div
           onClick={() => setToggleSidebar((newValue) => !newValue)}
           className="
@@ -83,9 +87,9 @@ export const Sidebar = () => {
           <ChevronLeft
             className={`${
               !toggleSidebar && "rotate-180"
-            } transition duration-200 cursor-pointer`}
+            } transition duration-500 cursor-pointer`}
           />
-          <span className="invisible w-24 inline-flex absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-slate-200 px-2 py-1.5 text-xs font-medium text-neutral-700 group-hover/arrow:visible duration-200 ease-in-out text-center">
+          <span className="invisible w-24 inline-flex absolute start-full top-1/2 ms-4 -translate-y-1/2 rounded bg-slate-200 px-2 py-1.5 text-xs font-medium text-neutral-700 group-hover/arrow:visible transition duration-200 ease-in-out text-center">
             {toggleSidebar ? "Close sidebar" : "Open sidebar"}
           </span>
         </div>
@@ -108,9 +112,7 @@ export const Sidebar = () => {
         {/* <div className={`mt-10 fixed ${sidebarWidth}`}> */}
         <div className="mt-10">
           <div
-            className={`${
-              toggleSidebar ? "visible" : "invisible"
-            } px-4 text-[#707a8c] text-sm font-semibold mb-2`}
+            className={`${translateText} px-4 text-[#707a8c] text-sm font-semibold mb-2 transition duration-300`}
           >
             Censor
           </div>
@@ -124,9 +126,7 @@ export const Sidebar = () => {
 
           <ul className="space-y-1 mt-14">
             <div
-              className={`${
-                toggleSidebar ? "visible" : "invisible"
-              } px-4 text-[#707a8c] text-sm font-semibold mb-2`}
+              className={`${translateText} px-4 text-[#707a8c] text-sm font-semibold mb-2 transition duration-300`}
             >
               Tools
             </div>
@@ -146,7 +146,7 @@ export const Sidebar = () => {
       </div>
 
       <div
-        className={`fixed inset-x-0 bottom-0 border-t border-[#2d323b] bg-slate-900 ${sidebarWidth} transition`}
+        className={`fixed inset-x-0 z-20 bottom-0 border-t border-[#2d323b] bg-slate-900 ${sidebarWidth} transition`}
       >
         <NavbarItem
           label="Logout"

@@ -1,5 +1,6 @@
 "use client";
 
+import { HoverBorderGradient } from "@/components/aceternity/hover-border-gradient";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BackgroundGradient } from "@/components/ui/background-gradient";
 import { Button } from "@/components/ui/button";
@@ -33,7 +34,7 @@ export const PostItem = ({}: PostItemProps) => {
   // }
 
   return (
-    <div>
+    <div onClick={() => console.log("container")}>
       <BackgroundGradient
         className="
           rounded-3xl
@@ -56,24 +57,14 @@ export const PostItem = ({}: PostItemProps) => {
         {/* <div className="bg-red-500"> */}
 
         <div className="absolute top-4 right-2 flex items-center gap-x-1 2xl:gap-x-2">
-          <Button
-            className="
-              bg-slate-100
-              text-slate-800
-              invisible
-              group-hover/post:visible
-              hover:bg-slate-300
-              font-semibold
-              py-1
-              px-2
-              md:h-8
-              
-              rounded-lg
-              duration-200
-          "
+          <HoverBorderGradient
+            onClick={() => console.log("read post")}
+            containerClassName="rounded-md group-hover/post:visible invisible "
+            className="flex items-center text-slate-200 h-7 2xl:h-8 bg-black 2xl:space-x-2 gap-x-1 duration-200 "
           >
-            Read post <ExternalLink className="ml-1 h-5 w-5" />
-          </Button>
+            <span className="2xl:block hidden">Read post</span>{" "}
+            <ExternalLink className=" h-5 w-5" />
+          </HoverBorderGradient>
 
           <EllipsisVertical className="w-8 h-8 2xl:h-10 2xl:w-10 p-1 rounded-xl invisible group-hover/post:visible hover:bg-[#21262d] duration-200" />
         </div>

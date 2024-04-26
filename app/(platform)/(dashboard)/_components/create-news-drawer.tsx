@@ -14,7 +14,7 @@ import {
   DrawerTitle,
 } from "@/components/ui/drawer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useCreatePost } from "@/hooks/use-create-post";
+import { useCreateNews } from "@/hooks/use-create-news";
 import { PreviewContent } from "../news/[newsId]/_components/preview-content";
 import { FormSubmit } from "@/components/form/form-submit";
 import { Newspaper } from "lucide-react";
@@ -27,12 +27,12 @@ import RichTextExample from "@/components/form/form-text-editor";
 import { ImageUpload } from "../news/[newsId]/_components/image-upload";
 
 export const CreatePost = () => {
-  const createPost = useCreatePost();
+  const createPost = useCreateNews();
   const [editor] = useState(() => withReact(createEditor()));
 
   // console.log(editor);
 
-  const isOpen = useCreatePost((state) => state.isOpen);
+  const isOpen = useCreateNews((state) => state.isOpen);
 
   const onOpenChange = (e: boolean) => !e && createPost.onClose();
 

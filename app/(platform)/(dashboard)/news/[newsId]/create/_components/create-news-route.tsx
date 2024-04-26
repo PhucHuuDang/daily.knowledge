@@ -3,18 +3,8 @@
 import { FormInput } from "@/components/form/form-input";
 import { FormSelect } from "@/components/form/form-select";
 import { FormTextarea } from "@/components/form/form-textarea";
-import { Button } from "@/components/ui/button";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-} from "@/components/ui/drawer";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useCreatePost } from "@/hooks/use-create-post";
 import { FormSubmit } from "@/components/form/form-submit";
 import { Newspaper } from "lucide-react";
 import { IconType } from "react-icons";
@@ -28,14 +18,7 @@ import { PreviewContent } from "../../_components/preview-content";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 
 const CreateNewsRoute = () => {
-  const createPost = useCreatePost();
   const [editor] = useState(() => withReact(createEditor()));
-
-  // console.log(editor);
-
-  const isOpen = useCreatePost((state) => state.isOpen);
-
-  const onOpenChange = (e: boolean) => !e && createPost.onClose();
 
   const onSubmit = (formData: FormData) => {
     const test = formData.get("title");

@@ -5,18 +5,16 @@ import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { SearchIcon } from "@/components/ui/search-icon";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useCreatePost } from "@/hooks/use-create-post";
+import { useCreateNews } from "@/hooks/use-create-news";
 import { UserButton, useSignIn } from "@clerk/nextjs";
 import { Bell } from "lucide-react";
 
 export const Navbar = () => {
-  const createPost = useCreatePost();
-
+  const createNews = useCreateNews();
   const { isLoaded } = useSignIn();
 
   const onClick = () => {
-    createPost.onOpen();
-    // console.log(createPost.isOpen);
+    createNews.onOpen();
   };
 
   return (

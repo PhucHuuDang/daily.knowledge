@@ -21,10 +21,11 @@ const CreateNewsRoute = () => {
   const [editor] = useState(() => withReact(createEditor()));
 
   const onSubmit = (formData: FormData) => {
-    const test = formData.get("title");
+    const imageUrl = formData.get("image") as string;
+    const title = formData.get("title") as string;
     const content = formData.get("content") as string;
-    const category = formData.get("category");
-    console.log({ category, test, content });
+    const category = formData.get("category") as string;
+    console.log({ imageUrl, title, category, content });
   };
   const initialValue = [
     {
@@ -34,10 +35,10 @@ const CreateNewsRoute = () => {
   ];
 
   return (
-    <div className="w-full h-full ">
+    <div className="w-full h-full">
       <Tabs defaultValue="content-part" className="h-full">
         {/* bg-[#0e1217] */}
-        <div className="mx-auto w-full h-full bg-gradient-to-r from-slate-900 to-slate-700 p-10 overflow-auto">
+        <div className="mx-auto w-full h-full bg-gradient-to-r from-slate-900 to-slate-700 p-10">
           {/* <div className=""> */}
           <TabsList className="w-1/2 mx-auto grid grid-cols-2 bg-[#1a1f25] relative z-10 ">
             {/* <div className="w-1/2 mx-auto my-5 flex items-center text-white gap-x-10"> */}
@@ -65,7 +66,7 @@ const CreateNewsRoute = () => {
               <FormSubmit>Submit</FormSubmit>
 
               <div className="my-5">
-                <ImageUpload />
+                <ImageUpload id="image" />
               </div>
 
               <div className="my-5">

@@ -60,13 +60,13 @@ export const PostItem = ({}: PostItemProps) => {
           <HoverBorderGradient
             onClick={() => console.log("read post")}
             containerClassName="rounded-md group-hover/post:visible invisible "
-            className="flex items-center text-slate-200 h-7 2xl:h-8 bg-black 2xl:space-x-2 gap-x-1 duration-200 "
+            className="flex items-center text-slate-200 h-7 2xl:h-8 bg-black 2xl:space-x-2 gap-x-1"
           >
             <span className="2xl:block hidden">Read post</span>{" "}
             <ExternalLink className=" h-5 w-5" />
           </HoverBorderGradient>
 
-          <EllipsisVertical className="w-8 h-8 2xl:h-10 2xl:w-10 p-1 rounded-xl invisible group-hover/post:visible hover:bg-[#21262d] duration-200" />
+          <EllipsisVertical className="w-8 h-8 2xl:h-10 2xl:w-10 p-1 rounded-xl invisible group-hover/post:visible hover:bg-[#21262d] " />
         </div>
 
         <div className="flex items-center gap-2 my-2">

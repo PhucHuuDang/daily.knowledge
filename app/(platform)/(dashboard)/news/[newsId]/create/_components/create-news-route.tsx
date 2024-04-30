@@ -12,7 +12,7 @@ import { IconType } from "react-icons";
 import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 import { useState } from "react";
-import RichTextExample from "@/components/form/form-text-editor";
+import { FormRichTextEditor } from "@/components/form/form-text-editor";
 import { ImageUpload } from "../../_components/image-upload";
 import { PreviewContent } from "../../_components/preview-content";
 import { BackgroundBeams } from "@/components/ui/background-beams";
@@ -25,7 +25,8 @@ const CreateNewsRoute = () => {
     const title = formData.get("title") as string;
     const content = formData.get("content") as string;
     const category = formData.get("category") as string;
-    console.log({ imageUrl, title, category, content });
+    const contentEditor = formData.get("editor") as string;
+    console.log({ imageUrl, title, category, content, contentEditor });
   };
   const initialValue = [
     {
@@ -35,7 +36,7 @@ const CreateNewsRoute = () => {
   ];
 
   return (
-    <div className="w-full h-full">
+    <div className="relative w-full h-full">
       <Tabs defaultValue="content-part" className="h-full">
         {/* bg-[#0e1217] */}
         <div className="mx-auto w-full h-full bg-gradient-to-r from-slate-900 to-slate-700 p-10">
@@ -140,17 +141,16 @@ const CreateNewsRoute = () => {
                 "
                 />
               </div>
-              {/* 
-                <div>
-                  <Slate editor={editor} initialValue={initialValue}>
-                    <Editable className="bg-white" />
-                  </Slate>
-                </div> */}
 
-              {/* <div className="my-8 p-3 rounded-xl">
-                      <RichTextExample editorProps={editor} />
-                    </div> */}
+              <div className="my-8 rounded-xl">
+                <FormRichTextEditor
+                  className="pt-4 caret-sky-600 text-lg"
+                  id="editor"
+                  editorProps={editor}
+                />
+              </div>
             </form>
+            {/* <BackgroundBeams /> */}
           </TabsContent>
           {/* </div> */}
           <TabsContent value="preview-part">

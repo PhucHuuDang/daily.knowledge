@@ -11,6 +11,7 @@ import {
   Element as SlateElement,
   BaseElement,
 } from "slate";
+import { cn } from "@/lib/utils";
 import { withHistory } from "slate-history";
 
 import {
@@ -46,6 +47,8 @@ interface CustomElement extends BaseElement {
 interface RichTextProps {
   editorProps?: any;
   id?: string;
+  className?: string;
+  placeholder?: string;
 }
 
 const HOTKEYS: HotKeysProps = {
@@ -59,25 +62,30 @@ const LIST_TYPES = ["numbered-list", "bulleted-list"];
 const TEXT_ALIGN_TYPES = ["left", "center", "right", "justify"];
 
 const MARK_BUTTON_ICON = [
-  { format: "bold", icon: <Bold /> },
-  { format: "italic", icon: <Italic /> },
-  { format: "underline", icon: <Underline /> },
-  { format: "code", icon: <Code /> },
+  { format: "bold", icon: <Bold className="h-5 w-5" /> },
+  { format: "italic", icon: <Italic className="h-5 w-5" /> },
+  { format: "underline", icon: <Underline className="h-5 w-5" /> },
+  { format: "code", icon: <Code className="h-5 w-5" /> },
 ];
 
 const BLOCK_BUTTON_ICON = [
-  { format: "heading-one", icon: <Heading1 /> },
-  { format: "heading-two", icon: <Heading2 /> },
-  { format: "block-quote", icon: <Quote /> },
-  { format: "numbered-list", icon: <ListOrdered /> },
-  { format: "bulleted-list", icon: <List /> },
-  { format: "left", icon: <AlignLeft /> },
-  { format: "center", icon: <AlignCenter /> },
-  { format: "right", icon: <AlignRight /> },
-  { format: "justify", icon: <AlignJustify /> },
+  { format: "heading-one", icon: <Heading1 className="h-5 w-5" /> },
+  { format: "heading-two", icon: <Heading2 className="h-5 w-5" /> },
+  { format: "block-quote", icon: <Quote className="h-5 w-5" /> },
+  { format: "numbered-list", icon: <ListOrdered className="h-5 w-5" /> },
+  { format: "bulleted-list", icon: <List className="h-5 w-5" /> },
+  { format: "left", icon: <AlignLeft className="h-5 w-5" /> },
+  { format: "center", icon: <AlignCenter className="h-5 w-5" /> },
+  { format: "right", icon: <AlignRight className="h-5 w-5" /> },
+  { format: "justify", icon: <AlignJustify className="h-5 w-5" /> },
 ];
 
-const RichTextExample = ({ editorProps, id }: RichTextProps) => {
+export const FormRichTextEditor = ({
+  editorProps,
+  id,
+  className,
+  placeholder = "Enter some rich text…",
+}: RichTextProps) => {
   const renderElement = useCallback((props: any) => <Element {...props} />, []);
   const renderLeaf = useCallback((props: any) => <Leaf {...props} />, []);
   // const editor = useMemo(() => withHistory(withReact(createEditor())), []);
@@ -92,6 +100,8 @@ const RichTextExample = ({ editorProps, id }: RichTextProps) => {
 
   return (
     <Slate
+      // id={id!}
+      // name={id!}
       editor={(editor as any) || (editorProps as any)}
       onChange={(newValue) => {
         setTimeout(() => {
@@ -110,16 +120,23 @@ const RichTextExample = ({ editorProps, id }: RichTextProps) => {
         ))}
       </Toolbar>
 
+      {/* <label>Test</label> */}
+
       <Editable
         // onKeyDownCapture={(e) => console.log(e.key)}
         id={id}
         name={id}
-        className="text-white"
+        value={editor as any}
+        // placeholder={placeholder}
+        className={cn(
+          "focus:border-[1px] text-[#a8b3d0] p-1 pl-4 h-56 text-base bg-[#1a1f25] hover:bg-[#21262d] focus:bg-[#21262d] focus:border-slate-200 rounded-xl focus:ring-0 focus:ring-offset-0 focus:ring-offset-slate-200 focus:ring-slate-300 focus:ring-opacity-50 active:bg-[#2d333c] resize-none focus-visible:right-0 focus-visible:ring-offset-0 ring-0 outline-none shadow-sm ",
+          className
+        )}
         renderElement={renderElement}
         renderLeaf={renderLeaf}
-        placeholder="Enter some rich text…"
+        placeholder="test"
         spellCheck
-        autoFocus
+        // autoFocus
         onKeyDown={(event) => {
           for (const hotkey in HOTKEYS) {
             if (isHotkey(hotkey, event as any)) {
@@ -130,6 +147,7 @@ const RichTextExample = ({ editorProps, id }: RichTextProps) => {
           }
         }}
       />
+      <input type="text" id={id} name={id} value={editor as any} hidden />
     </Slate>
   );
 };
@@ -283,6 +301,7 @@ const BlockButton = ({
   const editor = useSlate();
   return (
     <Button
+      className=" rounded-lg p-1 hover:bg-slate-600 duration-150"
       active={isBlockActive(
         editor,
         format,
@@ -311,6 +330,7 @@ const MarkButton = ({
   const editor = useSlate();
   return (
     <Button
+      className="rounded-lg p-1 hover:bg-slate-600 duration-150"
       active={isMarkActive(editor, format)}
       onMouseDown={(event: KeyboardEvent) => {
         event.preventDefault();
@@ -372,9 +392,7 @@ const initialValue: DescendantDefined[] = [
   },
   {
     type: "paragraph",
-    align: "center",
+    // align: "center",
     children: [{ text: "Try it out for yourself!" }],
   },
 ];
-
-export default RichTextExample;

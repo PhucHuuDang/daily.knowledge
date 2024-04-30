@@ -50,7 +50,7 @@ export function FormSelect({
               key={category.value}
               className={`hover:cursor-pointer focus:text-slate-200 py-3 focus:bg-slate-700 focus:opacity-75 
               transition`}
-              textValue="test"
+              // textValue="test"
               value={category.value}
             >
               {/* //! if we lack of name or id we get null value

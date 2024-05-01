@@ -48,9 +48,9 @@ model Profile {
 model Post {
   id         String  @id @default(uuid())
   title      String
-  content    String
-  cencored   Boolean
-  cencoredBy String
+  content    String  @db.Text
+  censored   Boolean
+  censoredBy String
   published  Boolean @default(false)
 
   postType PostType
@@ -58,7 +58,7 @@ model Post {
   author   Author @relation(fields: [authorId], references: [id], onDelete: Cascade)
   authorId String
 
-  createdBy String
+  createdBy String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

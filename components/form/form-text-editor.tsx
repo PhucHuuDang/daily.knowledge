@@ -34,6 +34,7 @@ import {
   Quote,
   Underline,
 } from "lucide-react";
+import { Label } from "../ui/label";
 
 interface HotKeysProps {
   [key: string]: string;
@@ -121,6 +122,10 @@ export const FormRichTextEditor = ({
       </Toolbar>
 
       {/* <label>Test</label> */}
+
+      <Label className="text-lg font-semibold text-neutral-200 space-y-2">
+        Content*
+      </Label>
 
       <Editable
         // onKeyDownCapture={(e) => console.log(e.key)}

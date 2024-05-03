@@ -1,11 +1,15 @@
 "use client";
 
+import { format } from "date-fns";
+
 import { HoverBorderGradient } from "@/components/aceternity/hover-border-gradient";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BackgroundGradient } from "@/components/ui/background-gradient";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { PostWIthAuthor } from "@/types/types";
 import { useUser } from "@clerk/nextjs";
+import { Post } from "@prisma/client";
 import {
   Bookmark,
   EllipsisVertical,
@@ -15,23 +19,32 @@ import {
   MessageCircleMore,
 } from "lucide-react";
 import Image from "next/image";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
-interface PostItemProps {}
+interface PostItemProps {
+  data: PostWIthAuthor;
+}
 
-export const PostItem = ({}: PostItemProps) => {
+export const PostItem = ({ data }: PostItemProps) => {
   const { user } = useUser();
 
   const MAX_LENGTH = 63;
 
-  const text =
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisctempora maxime quaerat, eveniet iure sint deleæctus sunt quas non esse praesentium, architecto tenetur ullam suscipit";
+  // console.log(data);
 
   //? try to use it hover:bg-opacity-0
 
   // * use Skeleton for client side rendering when pending data
-  // if (true) {
-  //   return <PostItem.Skeleton />;
-  // }
+  if (!data) {
+    return (
+      <>
+        <PostItem.Skeleton />
+        <PostItem.Skeleton />
+        <PostItem.Skeleton />
+        <PostItem.Skeleton />
+      </>
+    );
+  }
 
   return (
     <div onClick={() => console.log("container")}>
@@ -71,27 +84,43 @@ export const PostItem = ({}: PostItemProps) => {
 
         <div className="flex items-center gap-2 my-2">
           <Avatar className="h-8 w-8 rounded-full flex">
-            <AvatarImage src={user?.externalAccounts[0].imageUrl} />
+            <AvatarImage src={data.author.image} />
             <AvatarFallback />
           </Avatar>
           <div className="flex flex-col">
             {/* !text-[#a8b3cf] */}
-            <div className="text-sm font-semibold">Dang Huu Phuc</div>
-            <span className="text-sm font-light">created At: 14:32 </span>
+            <div className="text-sm font-semibold">{data.author.name}</div>
+            <span className="text-sm font-light">
+              {format(new Date(data.createdAt), "MMM d, yyyy 'at' h:mm a")}
+            </span>
           </div>
         </div>
 
         <div className="my-2 text-base font-semibold min-h-14">
-          {text.length > MAX_LENGTH ? text.slice(0, MAX_LENGTH) + "..." : text}
+          {data.content.length > MAX_LENGTH
+            ? data.content.slice(0, MAX_LENGTH) + "..."
+            : data.content}
         </div>
 
         <Image
-          src="https://techcrunch.com/wp-content/uploads/2023/11/xAI-Grok-GettyImages-1765893916.jpeg?w=1390&crop=1"
-          height="350"
-          width="350"
-          className="object-contain rounded-2xl my-4"
-          alt="product"
+          src={data.image}
+          height={0}
+          width={0}
+          sizes="100vw"
+          // sizes={"(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"}
+          // style={{ width: "350px", height: "300px" }}
+          className="aspect-video object-cover w-96 md:h-48 2xl:h-56 rounded-2xl my-4"
+          alt={data.title}
         />
+
+        {/* <AspectRatio ratio={16 / 9} className="w-full h-full">
+          <Image
+            src={data.image}
+            fill
+            className="object-cover rounded-2xl w-full h-full"
+            alt={data.title}
+          />
+        </AspectRatio> */}
 
         <div className="flex items-center justify-between my-2 px-4">
           <Heart className="hover:bg-rose-200/30 hover:text-rose-500 h-7 w-7 rounded-md p-1 duration-200" />

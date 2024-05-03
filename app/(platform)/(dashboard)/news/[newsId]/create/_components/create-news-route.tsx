@@ -16,18 +16,55 @@ import { FormRichTextEditor } from "@/components/form/form-text-editor";
 import { ImageUpload } from "../../_components/image-upload";
 import { PreviewContent } from "../../_components/preview-content";
 import { BackgroundBeams } from "@/components/ui/background-beams";
+import { useAction } from "@/hooks/use-action";
+import { createNews } from "@/actions/create-news";
+import { toast } from "sonner";
+import { PostType } from "@prisma/client";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 const CreateNewsRoute = () => {
   const [editor] = useState(() => withReact(createEditor()));
+  const router = useRouter();
+
+  const { user } = useUser();
+
+  console.log({ user });
+
+  const { fieldErrors, execute } = useAction(createNews, {
+    onSuccess: (data) => {
+      toast.success("create news success");
+      router.refresh();
+    },
+    onError: (error: any) => {
+      toast.error("create news failed", error);
+      console.log({ error });
+    },
+  });
 
   const onSubmit = (formData: FormData) => {
-    const imageUrl = formData.get("image") as string;
     const title = formData.get("title") as string;
+    const imageUrl = formData.get("image") as string;
     const content = formData.get("content") as string;
     const category = formData.get("category") as string;
     const contentEditor = formData.get("editor") as string;
-    console.log({ imageUrl, title, category, content, contentEditor });
+    const authorImage = formData.get("authorImage") as string;
+
+    // console.log({ imageUrl, title, category, content, contentEditor });
+
+    execute({
+      title,
+      content,
+      authorImage,
+      image: imageUrl,
+      censored: true,
+      censoredBy: "Dang Huu Phuc",
+      email: user?.emailAddresses[0].emailAddress!,
+      published: true,
+      postType: category as PostType,
+    });
   };
+
   const initialValue = [
     {
       type: "paragraph",
@@ -36,7 +73,7 @@ const CreateNewsRoute = () => {
   ];
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative 2xl:static w-full h-full">
       <Tabs defaultValue="content-part" className="h-full">
         {/* bg-[#0e1217] */}
         <div className="mx-auto w-full h-full bg-gradient-to-r from-slate-900 to-slate-700 p-10">
@@ -65,6 +102,13 @@ const CreateNewsRoute = () => {
               className="w-1/2 mx-auto my-5 border bg-slate-200/5 border-[#454f5e] p-8 rounded-xl shadow-2xl relative z-10"
             >
               <FormSubmit>Submit</FormSubmit>
+
+              <input
+                hidden
+                id="authorImage"
+                name="authorImage"
+                value={user?.externalAccounts[0].imageUrl}
+              />
 
               <div className="my-5">
                 <ImageUpload id="image" />
@@ -142,13 +186,13 @@ const CreateNewsRoute = () => {
                 />
               </div>
 
-              <div className="my-8 rounded-xl">
+              {/* <div className="my-8 rounded-xl">
                 <FormRichTextEditor
                   className="pt-4 caret-sky-600 text-lg"
                   id="editor"
                   editorProps={editor}
                 />
-              </div>
+              </div> */}
             </form>
             {/* <BackgroundBeams /> */}
           </TabsContent>

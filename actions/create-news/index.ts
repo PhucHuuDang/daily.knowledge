@@ -1,10 +1,14 @@
+"use server";
+
 import { auth } from "@clerk/nextjs";
-import { InputType, ReturnType } from "./types";
-import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
-import { PostType } from "@prisma/client";
-import { createSafeAction } from "@/lib/create-safe-action";
+import { Author, PostType, Role } from "@prisma/client";
+
+import { db } from "@/lib/db";
+
 import { CreateNewPost } from "./schema";
+import { InputType, ReturnType } from "./types";
+import { createSafeAction } from "@/lib/create-safe-action";
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId, orgSlug } = auth();
@@ -15,20 +19,55 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
-  const { title, content, censored, censoredBy, published, postType } = data;
+  const {
+    title,
+    content,
+    censored,
+    censoredBy,
+    published,
+    postType,
+    image,
+    authorImage,
+    email,
+  } = data;
 
   let news;
   try {
-    news = await db.post.create({
-      data: {
-        title,
-        content,
-        censored,
-        censoredBy,
-        published,
-        createdBy: orgSlug ?? "HarryDang",
-        postType: PostType.TECHNOLOGY,
-        authorId: userId,
+    news = await db.author.upsert({
+      where: {
+        email,
+        userId,
+      },
+      update: {
+        posts: {
+          create: {
+            title,
+            content,
+            censored,
+            censoredBy,
+            published,
+            image: image,
+            postType: postType,
+          },
+        },
+      },
+      create: {
+        userId,
+        name: orgSlug ?? "Dang Huu Phuc",
+        email,
+        image: authorImage,
+        role: Role.ADMIN,
+        posts: {
+          create: {
+            title,
+            content,
+            censored,
+            censoredBy,
+            published,
+            image: image,
+            postType: postType,
+          },
+        },
       },
     });
   } catch (error) {
@@ -37,7 +76,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
-  revalidatePath("/news/123");
+  revalidatePath(`/news/${orgId}`);
 
   return {
     data: news,

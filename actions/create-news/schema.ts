@@ -9,6 +9,11 @@ export const CreateNewPost = z.object({
     })
     .min(10, { message: "Title must be at least 10 characters long" }),
 
+  image: z.string({
+    required_error: 'Image is required',
+    invalid_type_error: 'Image must be a string',
+  }),
+
   content: z
     .string({
       required_error: "Content is required",
@@ -21,5 +26,21 @@ export const CreateNewPost = z.object({
     invalid_type_error: "Invalid author of this post",
   }),
   published: z.boolean(),
-  postType: z.any(),
+  email: z
+    .string({
+      required_error: "Email is required",
+      invalid_type_error: "Email must be a string",
+    })
+    .email(),
+
+  authorImage: z.string({
+    required_error: "Author image is required",
+    invalid_type_error: "Author image must be a string",
+  }),
+  // name: z.string({
+  //   required_error: "Name is required",
+  //   invalid_type_error: "Name must be a string",
+  // }),
+  // postType: z.any(),
+  postType: z.nativeEnum(PostType),
 });

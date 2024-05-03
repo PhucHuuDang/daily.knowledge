@@ -28,8 +28,9 @@ enum PostType {
 
 model Author {
   id      String   @id @default(uuid())
+  userId  String   @unique
   name    String
-  email   String
+  email   String   @unique
   image   String   @db.Text
   posts   Post[]
   profile Profile?
@@ -46,8 +47,10 @@ model Profile {
 }
 
 model Post {
-  id         String  @id @default(uuid())
-  title      String
+  id    String @id @default(uuid())
+  title String
+
+  image      String  @db.Text
   content    String  @db.Text
   censored   Boolean
   censoredBy String

@@ -2,11 +2,13 @@ import { auth, currentUser } from "@clerk/nextjs";
 import { PostItem } from "./_components/post-item";
 import { db } from "@/lib/db";
 
-const NewsIdPage = async ({ params }: { params: { newsId: string } }) => {
+const NewsIdPage = async ({ params }: { params: { userId: string } }) => {
   const test = auth();
 
   // console.log({ test });
   // const user = await currentUser();
+
+  console.log(params.userId);
 
   const getAllNews = await db.post.findMany({
     include: {

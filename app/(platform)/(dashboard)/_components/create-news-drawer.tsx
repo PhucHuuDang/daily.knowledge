@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/drawer";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useCreateNews } from "@/hooks/use-create-news";
-import { PreviewContent } from "../news/[newsId]/_components/preview-content";
+import { PreviewContent } from "../news/[userId]/_components/preview-content";
 import { FormSubmit } from "@/components/form/form-submit";
 import { Newspaper } from "lucide-react";
 import { IconType } from "react-icons";
@@ -23,7 +23,7 @@ import { IconType } from "react-icons";
 import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 import { useState } from "react";
-import { ImageUpload } from "../news/[newsId]/_components/image-upload";
+import { ImageUpload } from "../news/[userId]/_components/image-upload";
 
 export const CreatePost = () => {
   const createPost = useCreateNews();

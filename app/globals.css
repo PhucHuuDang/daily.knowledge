@@ -34,7 +34,8 @@ body,
   border: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.cl-internal-b3fm6y {
+.cl-internal-b3fm6y,
+.cl-userButtonPopoverFooter {
   display: none;
 }
 

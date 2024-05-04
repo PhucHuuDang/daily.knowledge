@@ -23,18 +23,22 @@ import { PostType } from "@prisma/client";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
-const CreateNewsRoute = () => {
+interface CreateNewsRouteProps {
+  orgId: string;
+}
+
+const CreateNewsRoute = ({ orgId }: CreateNewsRouteProps) => {
   const [editor] = useState(() => withReact(createEditor()));
   const router = useRouter();
 
   const { user } = useUser();
 
-  console.log({ user });
+  // console.log({ user });
 
   const { fieldErrors, execute } = useAction(createNews, {
     onSuccess: (data) => {
       toast.success("create news success");
-      router.refresh();
+      router.push(`/news/${orgId}`);
     },
     onError: (error: any) => {
       toast.error("create news failed", error);
@@ -58,7 +62,7 @@ const CreateNewsRoute = () => {
       authorImage,
       image: imageUrl,
       censored: true,
-      censoredBy: "Dang Huu Phuc",
+      censoredBy: user?.username!,
       email: user?.emailAddresses[0].emailAddress!,
       published: true,
       postType: category as PostType,

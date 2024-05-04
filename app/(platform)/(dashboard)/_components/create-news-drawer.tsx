@@ -23,7 +23,6 @@ import { IconType } from "react-icons";
 import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
 import { useState } from "react";
-import RichTextExample from "@/components/form/form-text-editor";
 import { ImageUpload } from "../news/[newsId]/_components/image-upload";
 
 export const CreatePost = () => {

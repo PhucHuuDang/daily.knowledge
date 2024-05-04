@@ -32,6 +32,8 @@ export const PostItem = ({ data }: PostItemProps) => {
 
   // console.log(data);
 
+  // console.log({ user });
+
   //? try to use it hover:bg-opacity-0
 
   // * use Skeleton for client side rendering when pending data
@@ -47,7 +49,7 @@ export const PostItem = ({ data }: PostItemProps) => {
   }
 
   return (
-    <div onClick={() => console.log("container")}>
+    <div onClick={() => console.log(data.id)}>
       <BackgroundGradient
         className="
           rounded-3xl

@@ -1,4 +1,12 @@
-import { OrganizationProfile } from "@clerk/nextjs";
+import { OrganizationProfile, auth } from "@clerk/nextjs";
+
+export function generateMetadata() {
+  const { orgSlug } = auth();
+
+  return {
+    title: orgSlug + " " + "Settings",
+  };
+}
 
 const SettingsPage = () => {
   return (

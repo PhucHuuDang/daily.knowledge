@@ -18,7 +18,7 @@ interface NavbarItemProps {
   onClick?: () => void;
 }
 
-export const NavbarItem = ({
+export const NavItem = ({
   toggleSidebar,
   icon: Icon,
   label,

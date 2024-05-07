@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useOrganizationList, useUser } from "@clerk/nextjs";
+import { useAuth, useOrganizationList, useUser } from "@clerk/nextjs";
 import { useSignOutDialog } from "@/hooks/use-sign-out-alert-dialog";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -16,13 +16,14 @@ import {
   User,
 } from "lucide-react";
 
-import { NavbarItem } from "./nav-item";
+import { NavItem } from "./nav-item";
 
 export const Sidebar = () => {
   const [toggleSidebar, setToggleSidebar] = useState<boolean>(false);
   const router = useRouter();
 
   const { user } = useUser();
+  const { orgId, userId } = useAuth();
   const useSignOut = useSignOutDialog();
 
   const { userMemberships, isLoaded: isLoadedOrgList } = useOrganizationList({
@@ -35,12 +36,12 @@ export const Sidebar = () => {
     {
       title: "Settings",
       icon: <Settings />,
-      route: "/news/org_2eoNiBI0HXBF8Wg8bpYGz2EdzMv",
+      route: `/news/${orgId}/settings`,
     },
     {
       title: "Edit Post",
       icon: <Pencil />,
-      route: "/news/org_2eoNiBI0HXBF8Wg8bpYGz2EdzMv/edit",
+      route: `/news/${orgId}/edit`,
     },
     {
       title: "Users",
@@ -93,7 +94,7 @@ export const Sidebar = () => {
 
         <div className="mt-14">
           {/* <div className={`fixed ${sidebarWidth} `}> */}
-          <NavbarItem
+          <NavItem
             route="/news/org_2eoNiBI0HXBF8Wg8bpYGz2EdzMv"
             label="My feed"
             toggleSidebar={toggleSidebar}
@@ -102,7 +103,7 @@ export const Sidebar = () => {
               <AvatarImage src={user?.externalAccounts[0].imageUrl} />
               <AvatarFallback />
             </Avatar>
-          </NavbarItem>
+          </NavItem>
           {/* </div> */}
         </div>
 
@@ -113,13 +114,13 @@ export const Sidebar = () => {
           >
             Censor
           </div>
-          <NavbarItem
+          <NavItem
             route="/news/org_2eoNiBI0HXBF8Wg8bpYGz2EdzMv"
             label="Post Censored?"
             toggleSidebar={toggleSidebar}
           >
             <ShieldQuestion className="h-6 w-6" />
-          </NavbarItem>
+          </NavItem>
 
           <ul className="space-y-1 mt-14">
             <div
@@ -129,14 +130,15 @@ export const Sidebar = () => {
             </div>
 
             {NAVIGATION_SIDEBAR.map((item, index) => (
-              <NavbarItem
+              <NavItem
                 key={index}
                 route={item.route}
                 label={item.title}
                 toggleSidebar={toggleSidebar}
+                onClick={() => router.push(item.route)}
               >
                 {item.icon}
-              </NavbarItem>
+              </NavItem>
             ))}
           </ul>
         </div>
@@ -144,14 +146,14 @@ export const Sidebar = () => {
       <div
         className={`fixed inset-x-0 z-20 bottom-0  border-t border-[#2d323b] border-r border-r-[#3d3f43] bg-slate-900 ${sidebarWidth} duration-300`}
       >
-        <NavbarItem
+        <NavItem
           label="Logout"
           toggleSidebar={toggleSidebar}
           onClick={useSignOut.onOpen}
           delayDuration={200}
         >
           <LogOut className="w-6 h-5" />
-        </NavbarItem>
+        </NavItem>
       </div>
     </div>
   );

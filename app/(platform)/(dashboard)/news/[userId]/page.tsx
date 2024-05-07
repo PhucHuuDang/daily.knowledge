@@ -2,7 +2,7 @@ import { auth, currentUser } from "@clerk/nextjs";
 import { PostItem } from "./_components/post-item";
 import { db } from "@/lib/db";
 
-const NewsIdPage = async ({ params }: { params: { userId: string } }) => {
+const UserIdPage = async ({ params }: { params: { userId: string } }) => {
   const test = auth();
 
   // console.log({ test });
@@ -40,7 +40,7 @@ const NewsIdPage = async ({ params }: { params: { userId: string } }) => {
             2xl:min-h-full
         "
       >
-        {/* @params NewsIdPage: {params.newsId} */}
+        {/* @params UserIdPage: {params.newsId} */}
         {getAllNews.map((news) => (
           <>
             <PostItem key={news.id} data={news} />
@@ -55,4 +55,4 @@ const NewsIdPage = async ({ params }: { params: { userId: string } }) => {
   );
 };
 
-export default NewsIdPage;
+export default UserIdPage;

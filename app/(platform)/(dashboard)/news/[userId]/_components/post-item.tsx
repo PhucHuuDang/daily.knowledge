@@ -20,15 +20,16 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { useRouter } from "next/navigation";
 
 interface PostItemProps {
   data: PostWIthAuthor;
 }
 
 export const PostItem = ({ data }: PostItemProps) => {
-  const { user } = useUser();
-
   const MAX_LENGTH = 63;
+  const { user } = useUser();
+  const router = useRouter();
 
   // console.log(data);
 
@@ -49,7 +50,7 @@ export const PostItem = ({ data }: PostItemProps) => {
   }
 
   return (
-    <div onClick={() => console.log(data.id)}>
+    <div onClick={() => router.push(`/news/news-detail/${data.id}`)}>
       <BackgroundGradient
         className="
           rounded-3xl
@@ -104,16 +105,20 @@ export const PostItem = ({ data }: PostItemProps) => {
             : data.content}
         </div>
 
-        <Image
-          src={data.image}
-          height={0}
-          width={0}
-          sizes="100vw"
-          // sizes={"(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"}
-          // style={{ width: "350px", height: "300px" }}
-          className="aspect-video object-cover w-96 md:h-48 2xl:h-56 rounded-2xl my-4"
-          alt={data.title}
-        />
+        {data ? (
+          <Image
+            src={data.image}
+            height={0}
+            width={0}
+            sizes="100vw"
+            // sizes={"(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"}
+            // style={{ width: "350px", height: "300px" }}
+            className="aspect-video object-cover w-96 md:h-48 2xl:h-56 rounded-2xl my-4"
+            alt={data.title}
+          />
+        ) : (
+          <Skeleton className="aspect-video w-96 md:h-48 2xl:h-56 rounded-2xl my-4" />
+        )}
 
         {/* <AspectRatio ratio={16 / 9} className="w-full h-full">
           <Image

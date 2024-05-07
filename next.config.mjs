@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "techcrunch.com",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
     ],
   },
 };

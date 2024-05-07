@@ -5,12 +5,14 @@ import { Toaster } from "sonner";
 
 const PlatformLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <ClerkProvider>
-      <Toaster />
-      <CreatePost />
-      <SignOutAlertDialog />
-      {children}
-    </ClerkProvider>
+    // <ClerkProvider>
+      <>
+        <Toaster />
+        <CreatePost />
+        <SignOutAlertDialog />
+        {children}
+      </>
+    // </ClerkProvider>
   );
 };
 

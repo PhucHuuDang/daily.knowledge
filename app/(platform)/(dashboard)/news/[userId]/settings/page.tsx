@@ -1,10 +1,16 @@
-import { OrganizationProfile, auth } from "@clerk/nextjs";
+import { OrganizationProfile, currentUser } from "@clerk/nextjs";
 
-export function generateMetadata() {
-  const { orgSlug } = auth();
+export async function generateMetadata() {
+  const user = await currentUser();
 
   return {
-    title: orgSlug + " " + "Settings",
+    title: user?.username + " " + "Settings",
+    icons: [
+      {
+        url: user?.imageUrl,
+        href: user?.imageUrl,
+      },
+    ],
   };
 }
 

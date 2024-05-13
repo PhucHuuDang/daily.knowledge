@@ -21,12 +21,22 @@ import {
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { useRouter } from "next/navigation";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 interface PostItemProps {
   data: PostWIthAuthor;
+  authorNews?: boolean;
 }
 
-export const PostItem = ({ data }: PostItemProps) => {
+export const PostItem = ({ data, authorNews }: PostItemProps) => {
   const MAX_LENGTH = 63;
   const { user } = useUser();
   const router = useRouter();
@@ -81,8 +91,21 @@ export const PostItem = ({ data }: PostItemProps) => {
             <span className="2xl:block hidden">Read post</span>{" "}
             <ExternalLink className=" h-5 w-5" />
           </HoverBorderGradient>
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <EllipsisVertical className="w-8 h-8 2xl:h-10 2xl:w-10 p-1 rounded-xl invisible group-hover/post:visible focus-visible:visible hover:bg-[#21262d] " />
+            </DropdownMenuTrigger>
 
-          <EllipsisVertical className="w-8 h-8 2xl:h-10 2xl:w-10 p-1 rounded-xl invisible group-hover/post:visible hover:bg-[#21262d] " />
+            <DropdownMenuContent className="w-52">
+              <DropdownMenuLabel>Your options</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem>
+                  <Button variant="destructive">Delete</Button>
+                </DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
         <div className="flex items-center gap-2 my-2">

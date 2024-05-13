@@ -8,7 +8,7 @@ const UserIdPage = async ({ params }: { params: { userId: string } }) => {
   // console.log({ test });
   // const user = await currentUser();
 
-  console.log(params.userId);
+  // console.log(params.userId);
 
   const getAllNews = await db.post.findMany({
     include: {

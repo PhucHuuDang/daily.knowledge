@@ -11,6 +11,7 @@ import {
   ChevronLeft,
   LogOut,
   Pencil,
+  ScreenShare,
   Settings,
   ShieldQuestion,
   User,
@@ -37,6 +38,11 @@ export const Sidebar = () => {
       title: "Settings",
       icon: <Settings />,
       route: `/news/${orgId}/settings`,
+    },
+    {
+      title: "My posts",
+      icon: <ScreenShare />,
+      route: `/news/${orgId}/shared`,
     },
     {
       title: "Edit Post",

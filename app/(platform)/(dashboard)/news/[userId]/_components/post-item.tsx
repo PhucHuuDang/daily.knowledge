@@ -5,7 +5,6 @@ import { format } from "date-fns";
 import { HoverBorderGradient } from "@/components/aceternity/hover-border-gradient";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { BackgroundGradient } from "@/components/ui/background-gradient";
-import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { PostWIthAuthor } from "@/types/types";
 import { useUser } from "@clerk/nextjs";
@@ -14,9 +13,11 @@ import {
   Bookmark,
   EllipsisVertical,
   ExternalLink,
+  FilePenLine,
   Heart,
   Link as LinkLucid,
   MessageCircleMore,
+  Trash2,
 } from "lucide-react";
 import Image from "next/image";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -30,6 +31,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useAction } from "@/hooks/use-action";
+import { deleteNews } from "@/actions/delete-news";
+import { toast } from "sonner";
+import { FormSubmit } from "@/components/form/form-submit";
+import React, { MouseEventHandler } from "react";
+import { cn } from "@/lib/utils";
 
 interface PostItemProps {
   data: PostWIthAuthor;
@@ -45,8 +52,28 @@ export const PostItem = ({ data, authorNews }: PostItemProps) => {
 
   // console.log({ user });
 
-  //? try to use it hover:bg-opacity-0
+  const { execute } = useAction(deleteNews, {
+    onSuccess: (data) => {
+      toast.success(`The News has been deleted successfully`);
+    },
 
+    onError(error) {
+      toast.error(error);
+    },
+  });
+
+  const onDelete = (formData: FormData) => {
+    execute({
+      id: data.id,
+      authorId: data.authorId,
+      userIdInput: data.author.userId,
+    });
+  };
+
+  const defaultStyles =
+    "w-full h-8 flex items-center justify-start gap-4 hover:scale-105 hover:bg-slate-200/20 text-base text-[#707a8c] transition duration-200 ";
+
+  //? try to use it hover:bg-opacity-0
   // * use Skeleton for client side rendering when pending data
   if (!data) {
     return (
@@ -96,15 +123,44 @@ export const PostItem = ({ data, authorNews }: PostItemProps) => {
               <EllipsisVertical className="w-8 h-8 2xl:h-10 2xl:w-10 p-1 rounded-xl invisible group-hover/post:visible focus-visible:visible hover:bg-[#21262d] " />
             </DropdownMenuTrigger>
 
-            <DropdownMenuContent className="w-52">
-              <DropdownMenuLabel>Your options</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup>
-                <DropdownMenuItem>
-                  <Button variant="destructive">Delete</Button>
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-            </DropdownMenuContent>
+            {authorNews ? (
+              <DropdownMenuContent
+                className="w-40 bg-[#1c1f26] border border-[#383d47] p-0 "
+                onClick={(
+                  e: React.MouseEvent<HTMLDivElement, MouseEvent>
+                ): void => {
+                  e.stopPropagation();
+                }}
+              >
+                <DropdownMenuGroup className="w-full flex flex-col justify-center">
+                  {/* <DropdownMenuItem> */}
+                  {/* <div className="flex flex-col justify-center gap-y-2 bg-red-500 min-w-full"> */}
+                  <form action={onDelete}>
+                    <FormSubmit
+                      className={cn(`${defaultStyles}`, "hover:text-rose-500")}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                      Delete
+                    </FormSubmit>
+                  </form>
+                  <form action={() => {}}>
+                    <FormSubmit
+                      className={cn(`${defaultStyles}`, "hover:text-sky-500")}
+                    >
+                      <FilePenLine className="h-4 w-4" /> Edit
+                    </FormSubmit>
+                  </form>
+                  {/* </div> */}
+                  {/* </DropdownMenuItem> */}
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            ) : (
+              <DropdownMenuContent>
+                <DropdownMenuLabel className="w-52 z-50">
+                  Home page
+                </DropdownMenuLabel>
+              </DropdownMenuContent>
+            )}
           </DropdownMenu>
         </div>
 

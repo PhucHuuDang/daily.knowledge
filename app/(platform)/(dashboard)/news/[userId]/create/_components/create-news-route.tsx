@@ -22,6 +22,7 @@ import { toast } from "sonner";
 import { PostType } from "@prisma/client";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import { FormErrors } from "@/components/form/form-errors";
 
 interface CreateNewsRouteProps {
   orgId: string;
@@ -159,6 +160,7 @@ const CreateNewsRoute = ({ orgId }: CreateNewsRouteProps) => {
                         transition
                 "
                 />
+                <FormErrors id="title" errors={fieldErrors} />
               </div>
 
               <div className="my-5">

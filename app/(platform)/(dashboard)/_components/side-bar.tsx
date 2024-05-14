@@ -42,7 +42,7 @@ export const Sidebar = () => {
     {
       title: "My posts",
       icon: <ScreenShare />,
-      route: `/news/${orgId}/shared`,
+      route: `/news/${orgId}/news-shared`,
     },
     {
       title: "Edit Post",

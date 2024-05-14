@@ -7,7 +7,7 @@ export default function NotFound() {
   return (
     <>
       <Navbar />
-      <div className="flex flex-col items-center justify-center gap-2 h-[60vh] w-full">
+      <div className="flex flex-col items-center justify-center gap-2 h-[70vh] 2xl:h-[60vh] w-full">
         <Image
           src="/images/404_image.webp"
           height={500}

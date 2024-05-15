@@ -23,6 +23,7 @@ import { PostType } from "@prisma/client";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { FormErrors } from "@/components/form/form-errors";
+import { RichTextEditorForm } from "@/components/form/rich-text-editor/rich-text-editor";
 
 interface CreateNewsRouteProps {
   orgId: string;
@@ -199,6 +200,10 @@ const CreateNewsRoute = ({ orgId }: CreateNewsRouteProps) => {
                   editorProps={editor}
                 />
               </div> */}
+
+              <div className="my-5 ">
+                <RichTextEditorForm />
+              </div>
             </form>
             {/* <BackgroundBeams /> */}
           </TabsContent>

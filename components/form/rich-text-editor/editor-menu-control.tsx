@@ -138,7 +138,7 @@ export default function EditorMenuControls() {
 
       <MenuDivider />
 
-      {/* <MenuButtonImageUpload
+      <MenuButtonImageUpload
         onUploadFiles={(files) =>
           // For the sake of a demo, we don't have a server to upload the files
           // to, so we'll instead convert each one to a local "temporary" object
@@ -152,7 +152,7 @@ export default function EditorMenuControls() {
             alt: file.name,
           }))
         }
-      /> */}
+      />
 
       <MenuDivider />
 

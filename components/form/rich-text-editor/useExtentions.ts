@@ -34,20 +34,15 @@ import { TaskList } from "@tiptap/extension-task-list";
 import { TextAlign } from "@tiptap/extension-text-align";
 import { TextStyle } from "@tiptap/extension-text-style";
 import { Underline } from "@tiptap/extension-underline";
-// import {
-//   FontSize,
-//   HeadingWithAnchor,
-//   LinkBubbleMenuHandler,
-//   ResizableImage,
-//   TableImproved,
-// } from "../";
+
 import {
   FontSize,
   LinkBubbleMenuHandler,
   HeadingWithAnchor,
   TableImproved,
+  ResizableImage,
 } from "mui-tiptap";
-// import { mentionSuggestionOptions } from "./mentionSuggestionOptions";
+import { mentionSuggestionOptions } from "./mention-suggestion-options";
 
 export type UseExtensionsOptions = {
   /** Placeholder hint to show in the text input area before a user types a message. */
@@ -157,7 +152,7 @@ export default function useExtensions({
       LinkBubbleMenuHandler,
 
       //   // Extensions
-      //   Gapcursor,
+      Gapcursor,
       HeadingWithAnchor,
       TextAlign.configure({
         types: ["heading", "paragraph", "image"],
@@ -169,7 +164,7 @@ export default function useExtensions({
       Highlight.configure({ multicolor: true }),
       HorizontalRule,
 
-      // ResizableImage,
+      ResizableImage,
 
       // When images are dragged, we want to show the "drop cursor" for where they'll
       // land
@@ -180,9 +175,9 @@ export default function useExtensions({
         nested: true,
       }),
 
-      //   Mention.configure({
-      //     suggestion: mentionSuggestionOptions,
-      //   }),
+      Mention.configure({
+        suggestion: mentionSuggestionOptions,
+      }),
 
       Placeholder.configure({
         placeholder,

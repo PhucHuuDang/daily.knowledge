@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import {
   ChevronLeft,
+  FileUp,
   LogOut,
   Pencil,
   ScreenShare,
@@ -34,6 +35,11 @@ export const Sidebar = () => {
   });
 
   const NAVIGATION_SIDEBAR = [
+    {
+      title: "Create Post",
+      icon: <FileUp />,
+      route: `/news/${orgId}/create`,
+    },
     {
       title: "Settings",
       icon: <Settings />,

@@ -11,7 +11,7 @@ import { IconType } from "react-icons";
 
 import { createEditor } from "slate";
 import { Slate, Editable, withReact } from "slate-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { FormRichTextEditor } from "@/components/form/form-text-editor";
 import { ImageUpload } from "../../_components/image-upload";
 import { PreviewContent } from "../../_components/preview-content";
@@ -24,6 +24,8 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { FormErrors } from "@/components/form/form-errors";
 import { RichTextEditorForm } from "@/components/form/rich-text-editor/rich-text-editor";
+import { RichTextEditorRef, RichTextReadOnly } from "mui-tiptap";
+import useExtensions from "@/components/form/rich-text-editor/useExtentions";
 
 interface CreateNewsRouteProps {
   orgId: string;
@@ -32,8 +34,12 @@ interface CreateNewsRouteProps {
 const CreateNewsRoute = ({ orgId }: CreateNewsRouteProps) => {
   const [editor] = useState(() => withReact(createEditor()));
   const router = useRouter();
-
   const { user } = useUser();
+
+  const rteRef = useRef<RichTextEditorRef>(null);
+  const extensions = useExtensions({
+    // placeholder: "Add your own content here...",
+  });
 
   // console.log({ user });
 
@@ -56,6 +62,8 @@ const CreateNewsRoute = ({ orgId }: CreateNewsRouteProps) => {
     const contentEditor = formData.get("editor") as string;
     const authorImage = formData.get("authorImage") as string;
 
+    console.log({ content });
+
     // console.log({ imageUrl, title, category, content, contentEditor });
 
     execute({
@@ -71,12 +79,9 @@ const CreateNewsRoute = ({ orgId }: CreateNewsRouteProps) => {
     });
   };
 
-  const initialValue = [
-    {
-      type: "paragraph",
-      children: [{ text: "A line of text in a paragraph." }],
-    },
-  ];
+  const [submittedContent, setSubmittedContent] = useState("");
+
+  console.log({ submittedContent });
 
   return (
     <div className="relative 2xl:static w-full h-full">
@@ -164,7 +169,7 @@ const CreateNewsRoute = ({ orgId }: CreateNewsRouteProps) => {
                 <FormErrors id="title" errors={fieldErrors} />
               </div>
 
-              <div className="my-5">
+              {/* <div className="my-5">
                 <FormTextarea
                   id="content"
                   label="Content*"
@@ -191,25 +196,25 @@ const CreateNewsRoute = ({ orgId }: CreateNewsRouteProps) => {
                         transition
                 "
                 />
-              </div>
-
-              {/* <div className="my-8 rounded-xl">
-                <FormRichTextEditor
-                  className="pt-4 caret-sky-600 text-lg"
-                  id="editor"
-                  editorProps={editor}
-                />
               </div> */}
 
               <div className="my-5 ">
-                <RichTextEditorForm />
+                <RichTextEditorForm
+                  id="content"
+                  ref={rteRef}
+                  setSubmittedContent={setSubmittedContent}
+                />
               </div>
             </form>
             {/* <BackgroundBeams /> */}
           </TabsContent>
           {/* </div> */}
           <TabsContent value="preview-part">
-            <PreviewContent />
+            {/* <PreviewContent /> */}
+            <RichTextReadOnly
+              extensions={extensions}
+              content={submittedContent}
+            />
           </TabsContent>
         </div>
       </Tabs>

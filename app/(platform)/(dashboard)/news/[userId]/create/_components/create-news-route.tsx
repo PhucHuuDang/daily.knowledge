@@ -23,9 +23,9 @@ import { PostType } from "@prisma/client";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { FormErrors } from "@/components/form/form-errors";
-import { RichTextEditorForm } from "@/components/form/rich-text-editor/rich-text-editor";
+import { RichTextEditorForm } from "@/components/form/rich-text-editor/rich-text-editor-form";
 import { RichTextEditorRef, RichTextReadOnly } from "mui-tiptap";
-import useExtensions from "@/components/form/rich-text-editor/useExtentions";
+import useExtensions from "@/components/form/rich-text-editor/use-extensions";
 
 interface CreateNewsRouteProps {
   orgId: string;
@@ -58,13 +58,13 @@ const CreateNewsRoute = ({ orgId }: CreateNewsRouteProps) => {
     const title = formData.get("title") as string;
     const imageUrl = formData.get("image") as string;
     const content = formData.get("content") as string;
-    const category = formData.get("category") as string;
+    const category = formData.get("postType") as string;
     const contentEditor = formData.get("editor") as string;
     const authorImage = formData.get("authorImage") as string;
 
-    console.log({ content });
+    // console.log({ content });
 
-    // console.log({ imageUrl, title, category, content, contentEditor });
+    console.log({ imageUrl, title, category, content, contentEditor });
 
     execute({
       title,
@@ -80,8 +80,6 @@ const CreateNewsRoute = ({ orgId }: CreateNewsRouteProps) => {
   };
 
   const [submittedContent, setSubmittedContent] = useState("");
-
-  console.log({ submittedContent });
 
   return (
     <div className="relative 2xl:static w-full h-full">
@@ -123,17 +121,20 @@ const CreateNewsRoute = ({ orgId }: CreateNewsRouteProps) => {
 
               <div className="my-5">
                 <ImageUpload id="image" />
+                <FormErrors id="image" errors={fieldErrors} />
               </div>
 
               <div className="my-5">
                 <FormSelect
-                  id="category"
+                  id="postType"
                   className="
                     bg-[#21262d]
                     text-neutral-200
                 "
                   icon={Newspaper as IconType}
                 />
+
+                <FormErrors id="postType" errors={fieldErrors} />
               </div>
 
               <div className="my-5">
@@ -204,6 +205,7 @@ const CreateNewsRoute = ({ orgId }: CreateNewsRouteProps) => {
                   ref={rteRef}
                   setSubmittedContent={setSubmittedContent}
                 />
+                <FormErrors id="content" errors={fieldErrors} />
               </div>
             </form>
             {/* <BackgroundBeams /> */}

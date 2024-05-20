@@ -1,8 +1,6 @@
 "use client";
 
 import { ForwardedRef, forwardRef, useCallback, useRef } from "react";
-import StarterKit from "@tiptap/starter-kit";
-import { useEditor } from "@tiptap/react";
 import type { EditorOptions } from "@tiptap/core";
 
 import {
@@ -12,8 +10,7 @@ import {
 } from "mui-tiptap";
 
 import EditorMenuControls from "./editor-menu-control";
-import useExtensions from "./useExtentions";
-import { Button } from "../../ui/button";
+import useExtensions from "./use-extensions";
 
 function fileListToImageFiles(fileList: FileList): File[] {
   // You may want to use a package like attr-accept
@@ -153,7 +150,7 @@ export const RichTextEditorForm = forwardRef<
             focus-visible:ring-transparent
             transition
         "
-        ref={ref}
+        ref={rteRef}
         // extensions={[StarterKit]} // Or any Tiptap extensions you wish!
         extensions={extensions}
         content="<p>Share with us something...</p>" // Initial content for the editor
@@ -182,25 +179,10 @@ export const RichTextEditorForm = forwardRef<
       <input
         id={id}
         name={id}
-        value={rteRef.current?.editor?.getHTML() ?? "No Text found"}
+        ref={rteRef as ForwardedRef<HTMLInputElement>}
+        value={rteRef.current?.editor?.getHTML()}
         hidden
       />
-
-      <Button
-        onClick={() => {
-          if (!isMutableRefObject(ref) || !ref.current) {
-            return;
-          }
-          const htmlContent =
-            rteRef.current?.editor?.getHTML() ?? "No HTML found.";
-          console.log(htmlContent);
-          if (setSubmittedContent) {
-            setSubmittedContent(htmlContent);
-          }
-        }}
-      >
-        Log HTML
-      </Button>
     </>
   );
 });

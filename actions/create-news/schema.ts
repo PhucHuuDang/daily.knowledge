@@ -10,14 +10,14 @@ export const CreateNewPost = z.object({
     .min(10, { message: "Title must be at least 10 characters long" }),
 
   image: z.string({
-    required_error: 'Image is required',
-    invalid_type_error: 'Image must be a string',
+    required_error: "Image is required",
+    invalid_type_error: "Image is required",
   }),
 
   content: z
     .string({
       required_error: "Content is required",
-      invalid_type_error: "Content is required to create a post",
+      invalid_type_error: "Content is required for create a post",
     })
     .min(50, { message: "Content must be at least 50 characters long" }),
   censored: z.boolean(),
@@ -42,5 +42,8 @@ export const CreateNewPost = z.object({
   //   invalid_type_error: "Name must be a string",
   // }),
   // postType: z.any(),
-  postType: z.nativeEnum(PostType),
+  postType: z.nativeEnum(PostType, {
+    required_error: "Type of post is required",
+    invalid_type_error: "Type of post is required",
+  }),
 });

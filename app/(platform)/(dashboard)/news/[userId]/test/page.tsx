@@ -1,6 +1,6 @@
 "use client";
 
-import useExtensions from "@/components/form/rich-text-editor/useExtentions";
+import useExtensions from "@/components/form/rich-text-editor/use-extensions";
 import { RichTextReadOnly } from "mui-tiptap";
 
 const TestPage = () => {

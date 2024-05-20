@@ -22,7 +22,7 @@ export const CreateNewPost = z.object({
     .min(50, { message: "Content must be at least 50 characters long" }),
   censored: z.boolean(),
   censoredBy: z.string({
-    required_error: "Cencored by is required",
+    required_error: "censored by is required",
     invalid_type_error: "Invalid author of this post",
   }),
   published: z.boolean(),

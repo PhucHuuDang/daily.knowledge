@@ -64,7 +64,7 @@ const CreateNewsRoute = ({ orgId }: CreateNewsRouteProps) => {
 
     // console.log({ content });
 
-    console.log({ imageUrl, title, category, content, contentEditor });
+    // console.log({ imageUrl, title, category, content, contentEditor });
 
     execute({
       title,

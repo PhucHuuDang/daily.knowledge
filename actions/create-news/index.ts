@@ -31,6 +31,21 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     email,
   } = data;
 
+  const isAdmin = await db.author.findUnique({
+    where: {
+      email: process.env.NEXT_PRIVATE_MAIL_ADMIN as string,
+    },
+    select: {
+      role: true,
+      email: true,
+    },
+  });
+
+  const role =
+    (isAdmin?.email === (process.env.NEXT_PRIVATE_MAIL_ADMIN as string)
+      ? Role.ADMIN
+      : Role.USER) ?? Role.USER;
+
   let news;
   try {
     news = await db.author.upsert({
@@ -56,7 +71,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         name: orgSlug ?? "Dang Huu Phuc",
         email,
         image: authorImage,
-        role: Role.ADMIN,
+        role,
         posts: {
           create: {
             title,

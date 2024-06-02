@@ -152,6 +152,12 @@ export const Sidebar = () => {
                 {item.icon}
               </NavItem>
             ))}
+
+            {/* <Dock>
+              {NAVIGATION_SIDEBAR.map((item, index) => (
+                <DockIcon onClick={() => console.log(item.title)} key={item.title}>{item.icon}</DockIcon>
+              ))}
+            </Dock> */}
           </ul>
         </div>
       </div>

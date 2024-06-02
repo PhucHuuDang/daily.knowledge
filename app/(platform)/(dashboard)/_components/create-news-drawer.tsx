@@ -49,7 +49,12 @@ export const CreatePost = () => {
   ];
 
   return (
-    <Drawer shouldScaleBackground open={isOpen} onOpenChange={onOpenChange}>
+    <Drawer
+      shouldScaleBackground
+      open={isOpen}
+      onOpenChange={onOpenChange}
+      modal={false}
+    >
       {/* <DrawerTrigger asChild>
         <Button variant="outline">Open Drawer</Button>
       </DrawerTrigger> */}

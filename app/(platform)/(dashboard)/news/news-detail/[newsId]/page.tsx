@@ -48,7 +48,7 @@ const NewsIdPage = async ({ params }: { params: { newsId: string } }) => {
             </div>
           </div>
 
-          <h1 className="my-4 text-[#a8b3cf] text-2xl font-bold text-center">
+          <h1 className="my-4 text-[#a8b3cf] text-xl xl:text-2xl 2xl:text-3xl font-bold text-center">
             {newsDetails?.title}
           </h1>
 

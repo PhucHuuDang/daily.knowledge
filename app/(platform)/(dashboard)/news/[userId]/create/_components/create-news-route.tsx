@@ -59,7 +59,7 @@ const CreateNewsRoute = ({ orgId }: CreateNewsRouteProps) => {
     const imageUrl = formData.get("image") as string;
     const content = formData.get("content") as string;
     const category = formData.get("postType") as string;
-    const contentEditor = formData.get("editor") as string;
+    // const contentEditor = formData.get("editor") as string;
     const authorImage = formData.get("authorImage") as string;
 
     // console.log({ content });
@@ -71,10 +71,10 @@ const CreateNewsRoute = ({ orgId }: CreateNewsRouteProps) => {
       content,
       authorImage,
       image: imageUrl,
-      censored: true,
+      censored: false,
       censoredBy: user?.username!,
       email: user?.emailAddresses[0].emailAddress!,
-      published: true,
+      published: false,
       postType: category as PostType,
     });
   };

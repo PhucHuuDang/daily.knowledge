@@ -7,11 +7,13 @@ export const BackgroundGradient = ({
   className,
   containerClassName,
   animate = true,
+  onClick
 }: {
   children?: React.ReactNode;
   className?: string;
   containerClassName?: string;
   animate?: boolean;
+  onClick: () => void;
 }) => {
   const variants = {
     initial: {
@@ -22,7 +24,10 @@ export const BackgroundGradient = ({
     },
   };
   return (
-    <div className={cn("relative p-[4px] group", containerClassName)}>
+    <div
+      onClick={onClick}
+      className={cn("relative p-[4px] group", containerClassName)}
+    >
       <motion.div
         variants={animate ? variants : undefined}
         initial={animate ? "initial" : undefined}

@@ -44,7 +44,7 @@ interface PostItemProps {
 }
 
 export const PostItem = ({ data, authorNews }: PostItemProps) => {
-  const MAX_LENGTH = 63;
+  const MAX_LENGTH = 200;
   const { user } = useUser();
   const router = useRouter();
 
@@ -85,27 +85,25 @@ export const PostItem = ({ data, authorNews }: PostItemProps) => {
       </>
     );
   }
+  //max-w-sm px-2 py-2 my-1 w-full mx-1
 
   return (
-    <div onClick={() => router.push(`/news/news-detail/${data.id}`)}>
+    <div>
       <BackgroundGradient
+        onClick={() => router.push(`/news/news-detail/${data.id}`)}
         className="
           rounded-3xl
           group/post
-          my-1
-          max-w-sm
-          px-2
-          py-2
           bg-zinc-900
           hover:bg-opacity-[0.93]
-          mx-1
-          dark:bg-zinc-900
-          object-cover
-          hover:cursor-pointer
+          cursor-pointer
           duration-200
-          relative
+          max-w-md 
+          p-2 
+          sm:p-4
+          
           "
-        containerClassName="w-full "
+        containerClassName=""
       >
         {/* <div className="bg-red-500"> */}
 
@@ -183,6 +181,8 @@ export const PostItem = ({ data, authorNews }: PostItemProps) => {
             ? data.content.slice(0, MAX_LENGTH) + "..."
             : data.content}
         </div>
+
+        <div className="my-2 min-h-10"> </div>
 
         {data ? (
           <Image

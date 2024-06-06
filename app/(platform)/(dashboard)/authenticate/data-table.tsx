@@ -52,6 +52,7 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { useSetPublishAlertDialog } from "@/hooks/use-set-publish";
+import { PublishCensor } from "./publish-censor";
 
 const data: Payment[] = [
   {
@@ -218,7 +219,7 @@ export const columns: ColumnDef<PostWIthAuthor>[] = [
         ? "Censored"
         : "Not censored";
 
-      console.log(row.getValue("censored"));
+      // console.log(row.getValue("censored"));
       return (
         <div
           className={`capitalize ${
@@ -262,20 +263,13 @@ export const columns: ColumnDef<PostWIthAuthor>[] = [
     accessorKey: "published",
     header: () => <div className="text-right">Published</div>,
     cell: ({ row }) => {
-      const publishedValue = parseFloat(row.getValue("published"));
+      const publishedValue = row.getValue("published");
 
       const published = row.original.published;
 
       const publishedText = published ? "Published" : "Pending";
 
       return (
-        // <div
-        //   className={`text-right font-medium cursor-pointer ${
-        //     published ? "text-green-700" : "text-rose-700"
-        //   } `}
-        // >
-        //   {publishedText}
-        // </div>
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <div
@@ -286,19 +280,22 @@ export const columns: ColumnDef<PostWIthAuthor>[] = [
               {publishedText}
             </div>
           </AlertDialogTrigger>
-          <AlertDialogContent>
+          {/* <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogTitle>
+                Do you want to publish this post?
+              </AlertDialogTitle>
               <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
+                The post will be published for readers reference, please make
+                sure the content is appropriate.
               </AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
               <AlertDialogAction>Continue</AlertDialogAction>
             </AlertDialogFooter>
-          </AlertDialogContent>
+          </AlertDialogContent> */}
+          <PublishCensor id={row.original.id} postTitle={row.original.title} />
         </AlertDialog>
       );
     },
